@@ -5,9 +5,9 @@ using System.IO;
 using System.Linq;
 using Domain;
 
-namespace Application
+namespace ViewModels
 {
-    public class Application
+    public class SVGConverter
     {
         public List<string> FilesToConvert { get; }
         public List<Resolution> SelectedResolutions { get; }
@@ -18,7 +18,7 @@ namespace Application
         private readonly string _defaultSaveLocation;
         private readonly IFileConverter _fileConverter;
 
-        public Application()
+        public SVGConverter()
         {
             FilesToConvert = new List<string>();
             SelectedResolutions = new List<Resolution>();

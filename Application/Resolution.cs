@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 
-namespace Application
+namespace ViewModels
 {
     public class Resolution
     {
@@ -23,6 +23,11 @@ namespace Application
             int heightPx = Convert.ToInt32(Math.Floor(Height * DPI));
 
             return new Size(widthPx, heightPx);
+        }
+
+        public override string ToString()
+        {
+            return $"{Width}in x {Height}in";
         }
     }
 }

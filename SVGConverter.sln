@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastru
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{9982BBE8-140D-4A7F-8CFD-008C1A80761D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{C8A7C3B5-14E5-49C5-99A9-E052436A3473}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewModels", "Application\ViewModels.csproj", "{C8A7C3B5-14E5-49C5-99A9-E052436A3473}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

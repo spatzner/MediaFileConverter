@@ -32,11 +32,12 @@ namespace Domain
         {
             SvgDocument svgDocument = GetDocument(file);
             Size intSize = DetermineSize(size, svgDocument);
-            Bitmap bitmap = new Bitmap(intSize.Width, intSize.Height);
 
-            svgDocument.Draw(bitmap);
-
-            bitmap.Save(saveLocation, ImageFormat.Png);
+            using (Bitmap bitmap = new Bitmap(intSize.Width, intSize.Height))
+            {
+                svgDocument.Draw(bitmap);
+                bitmap.Save(saveLocation, ImageFormat.Png);
+            }
         }
 
         private static Size DetermineSize(Size size, SvgDocument svgDocument)

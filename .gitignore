@@ -12,3 +12,5 @@
 /UnitTests/bin/Debug
 /UnitTests/obj
 /Application/obj
+/Application/bin/Debug
+/Infrastructure/obj/Release

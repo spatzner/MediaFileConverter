@@ -24,14 +24,19 @@ namespace Domain
 
         public void ConvertSVGToPNG(List<string> files, List<Size> sizes, string saveLocation)
         {
+            Directory.CreateDirectory(saveLocation);
             foreach (string file in files)
             {
                 var fileName = Path.GetFileNameWithoutExtension(file);
-                var fileSaveLocation = Path.Combine(saveLocation, fileName);
+                var outputSaveLocation = Path.Combine(saveLocation, fileName);
+                Directory.CreateDirectory(outputSaveLocation);
 
                 foreach (var size in sizes)
                 {
-                    _svgConverter.ConvertToPNG(file, size, fileSaveLocation);
+                    var fileSaveLocation =
+                        Path.Combine(outputSaveLocation, $"{fileName}_{size.Width}x{size.Height}.png");
+                    
+                        _svgConverter.ConvertToPNG(file, size, fileSaveLocation);
                 }
             }
         }

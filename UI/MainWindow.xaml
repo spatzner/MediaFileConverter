@@ -6,7 +6,76 @@
         xmlns:local="clr-namespace:UI"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <ListView Height="200" Width="300"></ListView>
+    <Grid Margin="15px">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <ListView Name="FilesToConvert"  
+                  Grid.Row="0" 
+                  Grid.RowSpan="8" 
+                  Grid.Column="0" >
+        </ListView>
+        <Button Name="AddFile"
+                Grid.Row="0" 
+                Grid.Column="1"
+                Click="AddFile_OnClick">
+            Add File To Convert
+        </Button>
+        <ListBox Name="Resolutions"
+                 Grid.Row="0" 
+                 Grid.RowSpan="8"
+                 Grid.Column="2"
+                 VerticalAlignment="Stretch"
+                 SelectionMode="Multiple"
+                 ItemsSource="{Binding Items}">
+            <ListBox.Resources>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="OverridesDefaultStyle" Value="true" />
+                    <Setter Property="SnapsToDevicePixels" Value="true" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ListBoxItem">
+                                <CheckBox Margin="5,2"
+                                          IsChecked="{TemplateBinding IsSelected}">
+                                    <ContentPresenter />
+                                </CheckBox>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListBox.Resources>
+        </ListBox>
+        <Button Name="ConvertFiles"
+                Grid.Row="0" 
+                Grid.Column="3"
+                Click="ConvertFiles_OnClick">
+            Convert Files
+        </Button>
+        <Button Name="SelectSaveLocation"
+                Grid.Row="8" 
+                Grid.Column="0"
+                Click="SelectSaveLocation_OnClick">
+            Choose...
+        </Button>
+        <TextBox  Name="SaveLocation"
+                  Grid.Row="8" 
+                  Grid.Column="1"
+                  Grid.ColumnSpan="2">
+        </TextBox>
     </Grid>
 </Window>
