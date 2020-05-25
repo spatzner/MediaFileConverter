@@ -8,16 +8,21 @@ using System.Threading.Tasks;
 
 namespace Domain
 {
-    public class RequestProcessor
+    public class FileConverter : IFileConverter
     {
         private readonly ISVGConverter _svgConverter;
 
-        public RequestProcessor(ISVGConverter svgConverter)
+        public FileConverter()
+        {
+            _svgConverter = new SVGConverter();
+        }
+
+        public FileConverter(ISVGConverter svgConverter)
         {
             _svgConverter = svgConverter;
         }
 
-        public void ConvertFiles(List<string> files, List<Size> sizes, string saveLocation)
+        public void ConvertSVGToPNG(List<string> files, List<Size> sizes, string saveLocation)
         {
             foreach (string file in files)
             {

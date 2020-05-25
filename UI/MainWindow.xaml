@@ -7,6 +7,6 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <ListView Height="200" Width="300"></ListView>
     </Grid>
 </Window>
