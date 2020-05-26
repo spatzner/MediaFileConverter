@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace Domain
+namespace Domain.Converters
 {
     public interface ISVGConverter
     {

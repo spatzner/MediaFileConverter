@@ -54,10 +54,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IFileConverter.cs" />
-    <Compile Include="ISVGConverter.cs" />
-    <Compile Include="FileConverter.cs" />
-    <Compile Include="SVGConverter.cs" />
+    <Compile Include="Converters\AIConverter.cs" />
+    <Compile Include="Converters\IAIConverter.cs" />
+    <Compile Include="_IFileProcessor.cs" />
+    <Compile Include="Converters\_IFileConverter.cs" />
+    <Compile Include="FileProcessor.cs" />
+    <Compile Include="Converters\SVGConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -68,6 +70,17 @@
       <Project>{a25d8d21-4fdb-4ab6-a0c0-380dcaa49c32}</Project>
       <Name>Infrastructure</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Illustrator">
+      <Guid>{4342E6A9-F5E0-4580-9F31-5149C20DE298}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

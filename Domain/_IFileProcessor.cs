@@ -3,7 +3,7 @@ using System.Drawing;
 
 namespace Domain
 {
-    public interface IFileConverter
+    public interface IFileProcessor
     {
         void ConvertSVGToPNG(List<string> files, List<Size> sizes, string saveLocation);
     }

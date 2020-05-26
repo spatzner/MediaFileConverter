@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using Domain;
+using Domain.Converters;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace UnitTests
@@ -18,6 +19,19 @@ namespace UnitTests
             string saveLocation = $@"C:\Users\scott\Desktop\Artboard 1_{size.Width}x{size.Height}.png";
 
             converter.ConvertToPNG(file, size, saveLocation);
+        }
+
+        [TestMethod]
+        public void TestAiToSvg()
+        {
+            using (AIConverter converter = new AIConverter())
+            {
+                string file = @"C:\Users\scott\Desktop\NEW CHEEKY PEACH 8X10.ai";
+                string saveDirectory = @"C:\Users\scott\Desktop\";
+
+                converter.ConvertToSVG(file, saveDirectory);
+            }
+
         }
     }
 }

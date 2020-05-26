@@ -1,18 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Drawing.Imaging;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Web.Hosting;
 using Infrastructure;
 using Svg;
 
-
-namespace Domain
+namespace Domain.Converters
 {
     public class SVGConverter : ISVGConverter
     {

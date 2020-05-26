@@ -5,19 +5,20 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Domain.Converters;
 
 namespace Domain
 {
-    public class FileConverter : IFileConverter
+    public class FileProcessor : IFileProcessor
     {
         private readonly ISVGConverter _svgConverter;
 
-        public FileConverter()
+        public FileProcessor()
         {
             _svgConverter = new SVGConverter();
         }
 
-        public FileConverter(ISVGConverter svgConverter)
+        public FileProcessor(ISVGConverter svgConverter)
         {
             _svgConverter = svgConverter;
         }

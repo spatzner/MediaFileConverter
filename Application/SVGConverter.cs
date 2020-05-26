@@ -16,7 +16,7 @@ namespace ViewModels
 
         private readonly List<Resolution> _suppliedResolutions;
         private readonly string _defaultSaveLocation;
-        private readonly IFileConverter _fileConverter;
+        private readonly IFileProcessor _fileProcessor;
 
         public SVGConverter()
         {
@@ -30,7 +30,7 @@ namespace ViewModels
                 new Resolution(11,14, 300)
             };
 
-            _fileConverter = new FileConverter();
+            _fileProcessor = new FileProcessor();
             _defaultSaveLocation = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             SaveLocation = _defaultSaveLocation;
         }
@@ -43,7 +43,7 @@ namespace ViewModels
                 saveLocation = Path.Combine(saveLocation, $"FileConverter{DateTime.Now:yyyyMMddhhmmss}");
 
             List<Size> sizes = SelectedResolutions.Select(x => x.ConvertToSize()).ToList();
-            _fileConverter.ConvertSVGToPNG(FilesToConvert, sizes, saveLocation);
+            _fileProcessor.ConvertSVGToPNG(FilesToConvert, sizes, saveLocation);
         }
 
         public void AddSuppliedResolution(Resolution resolution)
