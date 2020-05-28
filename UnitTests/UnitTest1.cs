@@ -24,13 +24,12 @@ namespace UnitTests
         [TestMethod]
         public void TestAiToSvg()
         {
-            using (AIConverter converter = new AIConverter())
-            {
-                string file = @"C:\Users\scott\Desktop\NEW CHEEKY PEACH 8X10.ai";
-                string saveDirectory = @"C:\Users\scott\Desktop\";
+            AIConverter converter = new AIConverter();
 
-                converter.ConvertToSVG(file, saveDirectory);
-            }
+            string file = @"C:\Users\scott\Desktop\NEW CHEEKY PEACH 8X10.ai";
+            string saveDirectory = @"C:\Users\scott\Desktop\";
+
+            converter.ConvertToSVG(file, saveDirectory);
 
         }
     }

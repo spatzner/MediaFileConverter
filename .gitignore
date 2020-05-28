@@ -10,6 +10,10 @@
 /UI/obj
 /UnitTests/bin
 /UnitTests/obj
-/Application/obj
-/Application/bin
+/ViewModels/obj
+/ViewModels/bin
 /.vs
+/Applications/bin
+/Applications/obj
+/Utilities/bin
+/Utilities/obj

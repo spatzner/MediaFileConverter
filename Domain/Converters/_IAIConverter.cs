@@ -2,7 +2,6 @@
 {
     public interface IAIConverter
     {
-        void ConvertToSVG(string file, string saveDirectory);
-        void Dispose();
+        string ConvertToSVG(string file, string saveDirectory);
     }
 }

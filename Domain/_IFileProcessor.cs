@@ -5,6 +5,6 @@ namespace Domain
 {
     public interface IFileProcessor
     {
-        void ConvertSVGToPNG(List<string> files, List<Size> sizes, string saveLocation);
+        void ConvertAIToPNG(List<string> files, List<Size> sizes, string saveLocation);
     }
 }

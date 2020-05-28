@@ -4,25 +4,20 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using Domain;
+using Utilities;
 
-namespace ViewModels
+namespace Applications
 {
-    public class SVGConverter
+    public class FileConverter : IFileConverter
     {
-        public List<string> FilesToConvert { get; }
-        public List<Resolution> SelectedResolutions { get; }
         public IReadOnlyCollection<Resolution> SuppliedResolutions => _suppliedResolutions.AsReadOnly();
-        public string SaveLocation { get; set; }
-
+  
         private readonly List<Resolution> _suppliedResolutions;
         private readonly string _defaultSaveLocation;
         private readonly IFileProcessor _fileProcessor;
 
-        public SVGConverter()
+        public FileConverter()
         {
-            FilesToConvert = new List<string>();
-            SelectedResolutions = new List<Resolution>();
-
             _suppliedResolutions = new List<Resolution>
             {
                 new Resolution(4,6, 300),
@@ -32,18 +27,24 @@ namespace ViewModels
 
             _fileProcessor = new FileProcessor();
             _defaultSaveLocation = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            SaveLocation = _defaultSaveLocation;
+
         }
 
 
-        public void ConvertFiles()
+        public void ConvertFiles(List<string> filesToConvert, List<Resolution> selectedResolutions, string saveLocation)
         {
-            string saveLocation = SaveLocation;
-            if (SaveLocation == _defaultSaveLocation)
+            CheckArgument.IsNullOrEmpty(nameof(filesToConvert), filesToConvert);
+            CheckArgument.IsNullOrEmpty(nameof(selectedResolutions), selectedResolutions);
+            CheckArgument.IsNullOrEmpty(nameof(saveLocation), saveLocation);
+
+            if (saveLocation == _defaultSaveLocation)
                 saveLocation = Path.Combine(saveLocation, $"FileConverter{DateTime.Now:yyyyMMddhhmmss}");
 
-            List<Size> sizes = SelectedResolutions.Select(x => x.ConvertToSize()).ToList();
-            _fileProcessor.ConvertSVGToPNG(FilesToConvert, sizes, saveLocation);
+            List<Size> sizes = selectedResolutions.Select(x => x.ConvertToSize()).ToList();
+            _fileProcessor.ConvertAIToPNG(filesToConvert, sizes, saveLocation);
+
+            selectedResolutions.Clear();
+            filesToConvert.Clear();
         }
 
         public void AddSuppliedResolution(Resolution resolution)

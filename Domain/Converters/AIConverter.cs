@@ -8,25 +8,21 @@ using Illustrator;
 
 namespace Domain.Converters
 {
-    public class AIConverter : IAIConverter, IDisposable
+    public class AIConverter : IAIConverter
     {
-        private Application _illustrator;
-
-        public AIConverter()
+        public string ConvertToSVG(string file, string saveDirectory)
         {
-            _illustrator = new Application();
-        }
+            var illustrator = new Application();
 
-        public void ConvertToSVG(string file, string saveDirectory)
-        {
+            Directory.CreateDirectory(saveDirectory);
 
-            _illustrator.Open(file);
+            illustrator.Open(file);
 
             string fileName = Path.GetFileNameWithoutExtension(file);
 
-            Document doc = _illustrator.Open(file);
+            Document doc = illustrator.Open(file);
 
-            var artBoards = _illustrator.ActiveDocument.Artboards.GetEnumerator();
+            var artBoards = illustrator.ActiveDocument.Artboards.GetEnumerator();
             artBoards.MoveNext();
 
             Artboard artBoard = artBoards.Current as Artboard;
@@ -35,12 +31,11 @@ namespace Domain.Converters
             doc.ExportForScreens(saveDirectory, AiExportForScreensType.aiSE_SVG);
             doc.Close(AiSaveOptions.aiDoNotSaveChanges);
             doc = null;
-        }
 
-        public void Dispose()
-        {
-            _illustrator.Quit();
-            _illustrator = null;
+            illustrator.Quit();
+            illustrator = null;
+
+            return Path.Combine(saveDirectory, "SVG", $"{fileName}.svg");
         }
     }
 }

@@ -55,9 +55,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Converters\AIConverter.cs" />
-    <Compile Include="Converters\IAIConverter.cs" />
+    <Compile Include="Converters\_IAIConverter.cs" />
+    <Compile Include="Converters\_ISVGConverter.cs" />
     <Compile Include="_IFileProcessor.cs" />
-    <Compile Include="Converters\_IFileConverter.cs" />
     <Compile Include="FileProcessor.cs" />
     <Compile Include="Converters\SVGConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

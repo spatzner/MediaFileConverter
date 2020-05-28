@@ -13,7 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using ViewModels;
+using Applications;
+using UI.ViewModels;
 
 namespace UI
 {
@@ -22,17 +23,17 @@ namespace UI
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly SVGConverter _svgConverter;
+        private readonly FileConverterViewModel _viewModel;
 
         public MainWindow()
         {
             InitializeComponent();
 
-            _svgConverter = new SVGConverter();
+            _viewModel = new FileConverterViewModel();
 
-            FilesToConvert.ItemsSource = _svgConverter.FilesToConvert;
-            Resolutions.ItemsSource = _svgConverter.SuppliedResolutions;
-            SaveLocation.Text = _svgConverter.SaveLocation;
+            FilesToConvert.ItemsSource = _viewModel.FilesToConvert;
+            Resolutions.ItemsSource = _viewModel.SuppliedResolutions;
+            SaveLocation.Text = _viewModel.SaveLocation;
             Resolutions.SelectAll();
         }
 
@@ -40,16 +41,15 @@ namespace UI
         {
             Microsoft.Win32.OpenFileDialog fileDialog = new Microsoft.Win32.OpenFileDialog
             {
-                DefaultExt = ".svg",
-                Filter = "SVG|*.svg|All Files|*.*",
-                Multiselect = true,
-                
+                DefaultExt = ".ai",
+                Filter = "Adobe Illustrator|*.ai|All Files|*.*",
+                Multiselect = true
             };
 
             bool? result = fileDialog.ShowDialog();
 
             if (result == true)
-                _svgConverter.FilesToConvert.AddRange(fileDialog.FileNames);
+                _viewModel.FilesToConvert.AddRange(fileDialog.FileNames);
 
             FilesToConvert.Items.Refresh();
             
@@ -66,13 +66,7 @@ namespace UI
 
         private void ConvertFiles_OnClick(object sender, RoutedEventArgs e)
         {
-            _svgConverter.SelectedResolutions.Clear();
-            foreach (var resolutionsSelectedItem in Resolutions.SelectedItems)
-            {
-                _svgConverter.SelectedResolutions.Add(resolutionsSelectedItem as Resolution);
-            }
-
-            _svgConverter.ConvertFiles();
+            _viewModel.ConvertFiles(Resolutions.SelectedItems.Cast<Resolution>().ToList());
         }
     }
 }

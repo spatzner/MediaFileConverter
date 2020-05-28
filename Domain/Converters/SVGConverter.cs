@@ -1,5 +1,6 @@
 ﻿using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
 using Infrastructure;
 using Svg;
 
@@ -21,6 +22,9 @@ namespace Domain.Converters
 
         public void ConvertToPNG(string file, Size size, string saveLocation)
         {
+            var dir = Path.GetDirectoryName(saveLocation);
+            Directory.CreateDirectory(dir);
+
             SvgDocument svgDocument = GetDocument(file);
             Size intSize = DetermineSize(size, svgDocument);
 
