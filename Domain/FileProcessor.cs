@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Domain.Converters;
+using Domain.Models;
 
 namespace Domain
 {
@@ -26,7 +27,7 @@ namespace Domain
             _aiConverter = aiConverter;
         }
 
-        public void ConvertAIToPNG(List<string> files, List<Size> sizes, string saveLocation)
+        public void ConvertAIToPNG(List<string> files, List<ImageSize> imageSizes, string saveLocation)
         {
             Directory.CreateDirectory(saveLocation);
             foreach (string file in files)
@@ -36,12 +37,31 @@ namespace Domain
 
                 string svgFile = _aiConverter.ConvertToSVG(file, outputSaveLocation);
 
-                foreach (Size size in sizes)
+                foreach (ImageSize imageSize in imageSizes)
                 {
                     string fileSaveLocation =
-                        Path.Combine(outputSaveLocation, $"{fileName}_{size.Width}x{size.Height}.png");
+                        Path.Combine(outputSaveLocation, $"{fileName}_{imageSize.Width}x{imageSize.Height}.png");
 
-                    _svgConverter.ConvertToPNG(svgFile, size, fileSaveLocation);
+                    _svgConverter.ConvertToPNG(svgFile, imageSize.ToSize(), fileSaveLocation);
+                }
+            }
+        }
+
+        public void ConvertSVGToPNG(List<string> files, List<ImageSize> imageSizes, string saveLocation)
+        {
+            Directory.CreateDirectory(saveLocation);
+            foreach (string file in files)
+            {
+                var fileName = Path.GetFileNameWithoutExtension(file);
+                var outputSaveLocation = Path.Combine(saveLocation, fileName);
+                Directory.CreateDirectory(outputSaveLocation);
+
+                foreach (var imageSize in imageSizes)
+                {
+                    var fileSaveLocation =
+                        Path.Combine(outputSaveLocation, $"{fileName}_{imageSize.Width}x{imageSize.Height}.png");
+
+                    _svgConverter.ConvertToPNG(file, imageSize.ToSize(), fileSaveLocation);
                 }
             }
         }

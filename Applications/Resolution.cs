@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using Domain.Models;
 
 namespace Applications
 {
@@ -17,12 +18,10 @@ namespace Applications
             DPI = dpi;
         }
 
-        public Size ConvertToSize()
+        public ImageSize ConvertToImageSize()
         {
-            int widthPx = Convert.ToInt32(Math.Floor(Width * DPI));
-            int heightPx = Convert.ToInt32(Math.Floor(Height * DPI));
 
-            return new Size(widthPx, heightPx);
+            return new ImageSize(Width, Height, DPI);
         }
 
         public override string ToString()

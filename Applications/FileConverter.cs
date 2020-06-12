@@ -4,6 +4,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using Domain;
+using Domain.Models;
 using Utilities;
 
 namespace Applications
@@ -40,8 +41,9 @@ namespace Applications
             if (saveLocation == _defaultSaveLocation)
                 saveLocation = Path.Combine(saveLocation, $"FileConverter{DateTime.Now:yyyyMMddhhmmss}");
 
-            List<Size> sizes = selectedResolutions.Select(x => x.ConvertToSize()).ToList();
-            _fileProcessor.ConvertAIToPNG(filesToConvert, sizes, saveLocation);
+            List<ImageSize> sizes = selectedResolutions.Select(x => x.ConvertToImageSize()).ToList();
+            
+            _fileProcessor.ConvertSVGToPNG(filesToConvert, sizes, saveLocation);
 
             selectedResolutions.Clear();
             filesToConvert.Clear();

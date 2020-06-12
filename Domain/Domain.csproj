@@ -57,6 +57,7 @@
     <Compile Include="Converters\AIConverter.cs" />
     <Compile Include="Converters\_IAIConverter.cs" />
     <Compile Include="Converters\_ISVGConverter.cs" />
+    <Compile Include="Models\ImageSize.cs" />
     <Compile Include="_IFileProcessor.cs" />
     <Compile Include="FileProcessor.cs" />
     <Compile Include="Converters\SVGConverter.cs" />
@@ -82,5 +83,6 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -42,7 +42,7 @@ namespace UI
             Microsoft.Win32.OpenFileDialog fileDialog = new Microsoft.Win32.OpenFileDialog
             {
                 DefaultExt = ".ai",
-                Filter = "Adobe Illustrator|*.ai|All Files|*.*",
+                Filter = "SVG (.svg)|*.svg|All Files|*.*",
                 Multiselect = true
             };
 
