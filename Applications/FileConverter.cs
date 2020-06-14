@@ -17,26 +17,22 @@ namespace Applications
         private readonly string _defaultSaveLocation;
         private readonly IFileProcessor _fileProcessor;
 
-        public FileConverter(IFileProcessor fileProcessor)
+        public FileConverter(IFileProcessor fileProcessor, string defaultSaveLocation, List<Resolution> suppliedResolutions)
         {
-            _suppliedResolutions = new List<Resolution>
-            {
-                new Resolution(4,6, 300),
-                new Resolution(8,10, 300),
-                new Resolution(11,14, 300)
-            };
-
             _fileProcessor = fileProcessor;
-            _defaultSaveLocation = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            _defaultSaveLocation = defaultSaveLocation;
+            _suppliedResolutions = suppliedResolutions;
 
+            CheckIfArgument.IsNull(nameof(_fileProcessor), _fileProcessor);
+            CheckIfArgument.IsNullOrEmpty(nameof(_defaultSaveLocation), _defaultSaveLocation);
+            CheckIfArgument.IsNullOrEmpty(nameof(_suppliedResolutions), _suppliedResolutions);
         }
-
 
         public void ConvertFiles(List<string> filesToConvert, List<Resolution> selectedResolutions, string saveLocation)
         {
-            CheckArgument.IsNullOrEmpty(nameof(filesToConvert), filesToConvert);
-            CheckArgument.IsNullOrEmpty(nameof(selectedResolutions), selectedResolutions);
-            CheckArgument.IsNullOrEmpty(nameof(saveLocation), saveLocation);
+            CheckIfArgument.IsNullOrEmpty(nameof(filesToConvert), filesToConvert);
+            CheckIfArgument.IsNullOrEmpty(nameof(selectedResolutions), selectedResolutions);
+            CheckIfArgument.IsNullOrEmpty(nameof(saveLocation), saveLocation);
 
             if (saveLocation == _defaultSaveLocation)
                 saveLocation = Path.Combine(saveLocation, $"FileConverter{DateTime.Now:yyyyMMddhhmmss}");

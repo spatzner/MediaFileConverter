@@ -3,7 +3,7 @@ using System.Drawing;
 
 namespace Domain.Models
 {
-    public readonly struct ImageSize
+    public class ImageSize
     {
         public double Height { get; }
         public double Width { get; }

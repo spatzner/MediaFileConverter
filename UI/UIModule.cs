@@ -13,6 +13,7 @@ namespace UI
     {
         public override void Load()
         {
+            // ReSharper disable once PossibleNullReferenceException - Not null if wired correctly
             Kernel.Load(new[] {new ApplicationModule()});
 
             Bind<IFileConverterViewModel>().To<FileConverterViewModel>();

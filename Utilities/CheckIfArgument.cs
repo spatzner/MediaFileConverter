@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Utilities
 {
 
-    public static class CheckArgument
+    public static class CheckIfArgument
     {
         public static void IsNull(string argumentName, object argumentValue)
         {

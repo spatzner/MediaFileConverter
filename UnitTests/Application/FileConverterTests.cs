@@ -1,38 +1,1 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Applications;
-using Domain;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-
-namespace UnitTests.Application
-{
-    [TestClass]
-    public class FileConverterTests
-    {
-        #region Initialization
-
-        private Mock<IFileProcessor> mockFileProcessor;
-
-        private FileConverter sut;
-
-        [TestInitialize]
-        public void TestInitialize()
-        {
-
-            sut = new FileConverter(mockFileProcessor.Object);
-        }
-
-        #endregion Initialization
-
-        #region Constructor Tests
-
-
-
-
-        #endregion Constructor Tests
-    }
-}
+﻿using System;using System.Collections.Generic;using System.ComponentModel.Design;using System.Linq;using System.Text;using System.Threading.Tasks;using Applications;using Domain;using Microsoft.VisualStudio.TestTools.UnitTesting;using Moq;using UnitTests.TestUtilities;namespace UnitTests.Application{    [TestClass]    public class FileConverterTests    {        #region Initialization        private Mock<IFileProcessor> mockFileProcessor;        private string fakeSaveLocation;        private List<Resolution> fakeResolutions;        private FileConverter sut;        [TestInitialize]        public void TestInitialize()        {            mockFileProcessor = new Mock<IFileProcessor>();            fakeSaveLocation = "SaveLocation";            fakeResolutions = new List<Resolution> {new Resolution(6, 4, 300)};        }        #endregion Initialization        #region Constructor Tests        [TestMethod]        [TestCategory(TestCategories.Unit)]        [ExpectedException(typeof(ArgumentNullException))]        public void Constructor_WhenFileProcessorIsNull_ThrowsException()        {            sut = new FileConverter(null, fakeSaveLocation, fakeResolutions);        }        [TestMethod]        [TestCategory(TestCategories.Unit)]        [ExpectedException(typeof(ArgumentNullException))]        public void Constructor_WhenDefaultSaveLocationIsNull_ThrowsException()        {            sut = new FileConverter(mockFileProcessor.Object, null, fakeResolutions);        }        [TestMethod]        [TestCategory(TestCategories.Unit)]        [ExpectedException(typeof(ArgumentException))]        public void Constructor_WhenDefaultSaveLocationIsEmpty_ThrowsException()        {            sut = new FileConverter(mockFileProcessor.Object, string.Empty, fakeResolutions);        }        [TestMethod]        [TestCategory(TestCategories.Unit)]        [ExpectedException(typeof(ArgumentNullException))]        public void Constructor_WhenSuppliedResolutionIsNull_ThrowsException()        {            sut = new FileConverter(mockFileProcessor.Object, fakeSaveLocation, null);        }        [TestMethod]        [TestCategory(TestCategories.Unit)]        [ExpectedException(typeof(ArgumentException))]        public void Constructor_WhenSuppliedResolutionIsEmpty_ThrowsException()        {            sut = new FileConverter(mockFileProcessor.Object, fakeSaveLocation, new List<Resolution>());        }        #endregion Constructor Tests        #region ConvertFiles Tests        #endregion ConvertFiles Tests    }}

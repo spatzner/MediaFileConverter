@@ -13,7 +13,7 @@ namespace Domain
     {
         public override void Load()
         {
-            // ReSharper disable once PossibleNullReferenceException
+            // ReSharper disable once PossibleNullReferenceException - Not null if wired correctly
             Kernel.Load(new []{new InfrastructureModule()});
 
             Bind<IAIConverter>().To<AIConverter>();
