@@ -5,6 +5,8 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using Applications;
+using Ninject;
 
 namespace UI
 {
@@ -13,5 +15,19 @@ namespace UI
     /// </summary>
     public partial class App : Application
     {
+        private IKernel _container;
+
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+            
+            _container = new StandardKernel
+            (
+                new UIModule()
+            );
+            
+            Current.MainWindow = _container.Get<MainWindow>();
+            Current.MainWindow.Show();
+        }
     }
 }

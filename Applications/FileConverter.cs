@@ -17,7 +17,7 @@ namespace Applications
         private readonly string _defaultSaveLocation;
         private readonly IFileProcessor _fileProcessor;
 
-        public FileConverter()
+        public FileConverter(IFileProcessor fileProcessor)
         {
             _suppliedResolutions = new List<Resolution>
             {
@@ -26,7 +26,7 @@ namespace Applications
                 new Resolution(11,14, 300)
             };
 
-            _fileProcessor = new FileProcessor();
+            _fileProcessor = fileProcessor;
             _defaultSaveLocation = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
         }

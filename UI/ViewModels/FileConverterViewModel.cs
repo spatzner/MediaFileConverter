@@ -8,7 +8,7 @@ using Applications;
 
 namespace UI.ViewModels
 {
-    public class FileConverterViewModel
+    public class FileConverterViewModel : IFileConverterViewModel
     {
         public List<string> FilesToConvert { get; }
         public IReadOnlyCollection<Resolution> SuppliedResolutions { get; }
@@ -17,9 +17,10 @@ namespace UI.ViewModels
         private readonly string _defaultSaveLocation;
         private readonly IFileConverter _fileConverter;
 
-        public FileConverterViewModel()
+   
+        public FileConverterViewModel(IFileConverter fileConverter)
         {
-            _fileConverter = new FileConverter();
+            _fileConverter = fileConverter;
             _defaultSaveLocation = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
             FilesToConvert = new List<string>();

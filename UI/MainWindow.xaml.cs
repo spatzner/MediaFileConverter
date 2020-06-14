@@ -23,13 +23,13 @@ namespace UI
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly FileConverterViewModel _viewModel;
+        private readonly IFileConverterViewModel _viewModel;
 
-        public MainWindow()
+        public MainWindow(IFileConverterViewModel viewModel)
         {
             InitializeComponent();
 
-            _viewModel = new FileConverterViewModel();
+            _viewModel = viewModel;
 
             FilesToConvert.ItemsSource = _viewModel.FilesToConvert;
             Resolutions.ItemsSource = _viewModel.SuppliedResolutions;

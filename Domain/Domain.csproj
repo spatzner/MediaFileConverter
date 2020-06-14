@@ -34,6 +34,9 @@
     <Reference Include="Fizzler, Version=1.2.0.0, Culture=neutral, PublicKeyToken=4ebff4844e382110, processorArchitecture=MSIL">
       <HintPath>..\packages\Fizzler.1.2.0\lib\netstandard2.0\Fizzler.dll</HintPath>
     </Reference>
+    <Reference Include="Ninject, Version=3.3.4.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.3.4\lib\net45\Ninject.dll</HintPath>
+    </Reference>
     <Reference Include="Svg, Version=3.1.0.0, Culture=neutral, PublicKeyToken=12a0bac221edeae2, processorArchitecture=MSIL">
       <HintPath>..\packages\Svg.3.1.1\lib\net452\Svg.dll</HintPath>
     </Reference>
@@ -57,6 +60,7 @@
     <Compile Include="Converters\AIConverter.cs" />
     <Compile Include="Converters\_IAIConverter.cs" />
     <Compile Include="Converters\_ISVGConverter.cs" />
+    <Compile Include="DomainModule.cs" />
     <Compile Include="Models\ImageSize.cs" />
     <Compile Include="_IFileProcessor.cs" />
     <Compile Include="FileProcessor.cs" />
