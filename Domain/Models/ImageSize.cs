@@ -1,33 +1,80 @@
 ﻿using System;
 using System.Drawing;
+using System.Runtime.CompilerServices;
 
 namespace Domain.Models
 {
     public class ImageSize
     {
-        public double Height { get; }
-        public double Width { get; }
+        public float Height { get; }
+        public float Width { get; }
         public int DPI { get; }
         public int PixelHeight { get; }
         public int PixelWidth { get; }
 
-        public ImageSize(double width, double height, int dpi)
+        public ImageSize(float width, float height, int dpi)
         {
-            Height = height;
             Width = width;
+            Height = height;
             DPI = dpi;
             PixelHeight = ToPixels(height, dpi);
             PixelWidth = ToPixels(width, dpi);
         }
 
+        public ImageSize(int pixelWidth, int pixelHeight, int dpi)
+        {
+            PixelWidth = pixelWidth;
+            PixelHeight = pixelHeight;
+            DPI = dpi;
+            Width = ToInches(PixelWidth, DPI);
+            Height = ToInches(pixelHeight, dpi);
+        }
+
+        public ImageSize(int pixelWidth, int pixelHeight) 
+            : this(pixelWidth, pixelHeight, 300)
+        {
+        }
+
+        //TODO: Use AutoMapper
         public Size ToSize()
         {
             return new Size(PixelWidth, PixelHeight);
         }
 
-        private static int ToPixels(double length, int dpi)
+        private static int ToPixels(float length, int dpi)
         {
             return Convert.ToInt32(Math.Floor(length * dpi));
+        }
+
+        private static float ToInches(int pixels, int dpi)
+        {
+            return (float) pixels / dpi;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (!(obj is ImageSize imageSize))
+                return false;
+
+            return Equals(imageSize);
+        }
+
+        protected bool Equals(ImageSize other)
+        {
+            return DPI == other.DPI &&
+                   PixelHeight == other.PixelHeight &&
+                   PixelWidth == other.PixelWidth;
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = DPI;
+                hashCode = (hashCode * 397) ^ PixelHeight;
+                hashCode = (hashCode * 397) ^ PixelWidth;
+                return hashCode;
+            }
         }
     }
 }

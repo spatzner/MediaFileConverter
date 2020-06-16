@@ -6,18 +6,18 @@ namespace Applications
 {
     public class Resolution
     {
-        
-        public double Width { get; }
-        public double Height { get; }
+        public float Width { get; }
+        public float Height { get; }
         public int DPI { get; }
 
-        public Resolution(double widthInches, double heightInches, int dpi)
+        public Resolution(float widthInches, float heightInches, int dpi)
         {
             Width = widthInches;
             Height = heightInches;
             DPI = dpi;
         }
 
+        //TODO: use AutoMapper
         public ImageSize ConvertToImageSize()
         {
 

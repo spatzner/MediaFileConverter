@@ -64,6 +64,10 @@
       <Project>{3b85821e-49cf-42f5-a7ae-42c21631f0b9}</Project>
       <Name>Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj">
+      <Project>{A25D8D21-4FDB-4AB6-A0C0-380DCAA49C32}</Project>
+      <Name>Infrastructure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Utilities\Utilities.csproj">
       <Project>{86418748-f0ce-4a9e-8bfe-4ff7d07afc8c}</Project>
       <Name>Utilities</Name>

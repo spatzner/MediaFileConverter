@@ -38,7 +38,7 @@ namespace UI.ViewModels
             _fileConverter.ConvertFiles(FilesToConvert, selectedResolutions, saveLocation);
         }
 
-        public void AddSuppliedResolution(double width, double height, int dpi)
+        public void AddSuppliedResolution(float width, float height, int dpi)
         {
             _fileConverter.AddSuppliedResolution(new Resolution(width, height, dpi));
         }

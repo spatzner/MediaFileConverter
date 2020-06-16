@@ -52,13 +52,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Providers\DateTimeProvider.cs" />
+    <Compile Include="Providers\_IDateTimeProvider.cs" />
     <Compile Include="InfrastructureModule.cs" />
-    <Compile Include="SVGProvider.cs" />
-    <Compile Include="ISVGProvider.cs" />
+    <Compile Include="Providers\SVGProvider.cs" />
+    <Compile Include="Providers\_ISVGProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

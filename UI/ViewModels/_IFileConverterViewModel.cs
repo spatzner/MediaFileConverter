@@ -9,6 +9,6 @@ namespace UI.ViewModels
         IReadOnlyCollection<Resolution> SuppliedResolutions { get; }
         string SaveLocation { get; set; }
         void ConvertFiles(List<Resolution> selectedResolutions);
-        void AddSuppliedResolution(double width, double height, int dpi);
+        void AddSuppliedResolution(float width, float height, int dpi);
     }
 }

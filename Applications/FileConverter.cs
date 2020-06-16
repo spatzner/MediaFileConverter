@@ -5,27 +5,34 @@ using System.IO;
 using System.Linq;
 using Domain;
 using Domain.Models;
+using Infrastructure.Providers;
 using Utilities;
 
 namespace Applications
 {
     public class FileConverter : IFileConverter
     {
-        public IReadOnlyCollection<Resolution> SuppliedResolutions => _suppliedResolutions.AsReadOnly();
+        public IReadOnlyCollection<Resolution> SuppliedResolutions => suppliedResolutions.AsReadOnly();
   
-        private readonly List<Resolution> _suppliedResolutions;
-        private readonly string _defaultSaveLocation;
-        private readonly IFileProcessor _fileProcessor;
+        private readonly List<Resolution> suppliedResolutions;
+        private readonly string defaultSaveLocation;
+        private readonly IFileProcessor fileProcessor;
+        private readonly IDateTimeProvider dateTimeProvider;
 
-        public FileConverter(IFileProcessor fileProcessor, string defaultSaveLocation, List<Resolution> suppliedResolutions)
+        public FileConverter(IFileProcessor fileProcessor, 
+            IDateTimeProvider dateTimeProvider, 
+            List<Resolution> suppliedResolutions, 
+            string defaultSaveLocation)
         {
-            _fileProcessor = fileProcessor;
-            _defaultSaveLocation = defaultSaveLocation;
-            _suppliedResolutions = suppliedResolutions;
+            this.fileProcessor = fileProcessor;
+            this.dateTimeProvider = dateTimeProvider;
+            this.defaultSaveLocation = defaultSaveLocation;
+            this.suppliedResolutions = suppliedResolutions;
 
-            CheckIfArgument.IsNull(nameof(_fileProcessor), _fileProcessor);
-            CheckIfArgument.IsNullOrEmpty(nameof(_defaultSaveLocation), _defaultSaveLocation);
-            CheckIfArgument.IsNullOrEmpty(nameof(_suppliedResolutions), _suppliedResolutions);
+            CheckIfArgument.IsNull(nameof(this.fileProcessor), this.fileProcessor);
+            CheckIfArgument.IsNull(nameof(this.dateTimeProvider),this.dateTimeProvider);
+            CheckIfArgument.IsNullOrEmpty(nameof(this.defaultSaveLocation), this.defaultSaveLocation);
+            CheckIfArgument.IsNullOrEmpty(nameof(this.suppliedResolutions), this.suppliedResolutions);
         }
 
         public void ConvertFiles(List<string> filesToConvert, List<Resolution> selectedResolutions, string saveLocation)
@@ -34,20 +41,18 @@ namespace Applications
             CheckIfArgument.IsNullOrEmpty(nameof(selectedResolutions), selectedResolutions);
             CheckIfArgument.IsNullOrEmpty(nameof(saveLocation), saveLocation);
 
-            if (saveLocation == _defaultSaveLocation)
-                saveLocation = Path.Combine(saveLocation, $"FileConverter{DateTime.Now:yyyyMMddhhmmss}");
+            if (saveLocation == defaultSaveLocation)
+                saveLocation = Path.Combine(saveLocation, $"FileConverter{dateTimeProvider.Now:yyyyMMddhhmmss}");
 
             List<ImageSize> sizes = selectedResolutions.Select(x => x.ConvertToImageSize()).ToList();
             
-            _fileProcessor.ConvertSVGToPNG(filesToConvert, sizes, saveLocation);
-
-            selectedResolutions.Clear();
-            filesToConvert.Clear();
+            fileProcessor.ConvertSVGToPNG(filesToConvert, sizes, saveLocation);
         }
 
         public void AddSuppliedResolution(Resolution resolution)
         {
-            _suppliedResolutions.Add(resolution);
+            throw new NotImplementedException();
+            //suppliedResolutions.Add(resolution);
             //TODO: Save to config
         }
 
