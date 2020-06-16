@@ -41,9 +41,6 @@ namespace Applications
             CheckIfArgument.IsNullOrEmpty(nameof(selectedResolutions), selectedResolutions);
             CheckIfArgument.IsNullOrEmpty(nameof(saveLocation), saveLocation);
 
-            if (saveLocation == defaultSaveLocation)
-                saveLocation = Path.Combine(saveLocation, $"FileConverter{dateTimeProvider.Now:yyyyMMddhhmmss}");
-
             List<ImageSize> sizes = selectedResolutions.Select(x => x.ConvertToImageSize()).ToList();
             
             fileProcessor.ConvertSVGToPNG(filesToConvert, sizes, saveLocation);

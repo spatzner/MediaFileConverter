@@ -2,22 +2,23 @@
 using System.Drawing.Imaging;
 using System.IO;
 using Infrastructure;
+using Infrastructure.Providers;
+using Infrastructure.Wrappers;
 using Svg;
+using Utilities;
 
 namespace Domain.Converters
 {
     public class SVGConverter : ISVGConverter
     {
-        private readonly ISVGProvider _svgProvider;
+        private readonly ISVGWrapper isvgDocumentWrapper;
 
-        public SVGConverter()
-        {
-            _svgProvider = new SVGProvider();
-        }
 
-        public SVGConverter(ISVGProvider svgProvider)
+        public SVGConverter(ISVGWrapper isvgDocumentWrapper)
         {
-            _svgProvider = svgProvider;
+            this.isvgDocumentWrapper = isvgDocumentWrapper;
+
+            CheckIfArgument.IsNull(nameof(this.isvgDocumentWrapper), this.isvgDocumentWrapper);
         }
 
         public void ConvertToPNG(string file, Size size, string saveLocation)
@@ -26,28 +27,25 @@ namespace Domain.Converters
             Directory.CreateDirectory(dir);
 
             SvgDocument svgDocument = GetDocument(file);
-            Size intSize = DetermineSize(size, svgDocument);
+            Size internSize = OrientSize(size, svgDocument);
 
-            using (Bitmap bitmap = new Bitmap(intSize.Width, intSize.Height))
+            using (Bitmap bitmap = new Bitmap(internSize.Width, internSize.Height))
             {
                 svgDocument.Draw(bitmap);
                 bitmap.Save(saveLocation, ImageFormat.Png);
             }
         }
 
-        private static Size DetermineSize(Size size, SvgDocument svgDocument)
+        private static Size OrientSize(Size size, SvgDocument svgDocument)
         {
-            Size intSize = new Size(size.Width, size.Height);
-            if (svgDocument.Width > svgDocument.Height != size.Width > size.Height)
-                intSize = new Size(size.Height, size.Width);
-            return intSize;
+            return svgDocument.Width > svgDocument.Height != size.Width > size.Height
+                ? new Size(size.Height, size.Width)
+                : new Size(size.Width, size.Height);
         }
 
         private SvgDocument GetDocument(string file)
         {
-            SvgDocument svgDocument = _svgProvider.GetDocument(file);
-            svgDocument.AspectRatio = new SvgAspectRatio(SvgPreserveAspectRatio.none, false);
-            return svgDocument;
+            return isvgDocumentWrapper.GetDocument(file, new SvgAspectRatio(SvgPreserveAspectRatio.none, false));
         }
     }
 }

@@ -7,24 +7,19 @@ using System.Text;
 using System.Threading.Tasks;
 using Domain.Converters;
 using Domain.Models;
+using Utilities;
 
 namespace Domain
 {
     public class FileProcessor : IFileProcessor
     {
-        private readonly ISVGConverter _svgConverter;
-        private readonly IAIConverter _aiConverter;
-
-        public FileProcessor()
-        {
-            _svgConverter = new SVGConverter();
-            _aiConverter = new AIConverter();
-        }
+        private readonly ISVGConverter svgConverter;
+        private readonly IAIConverter aiConverter;
 
         public FileProcessor(ISVGConverter svgConverter, IAIConverter aiConverter)
         {
-            _svgConverter = svgConverter;
-            _aiConverter = aiConverter;
+            this.svgConverter = svgConverter;
+            this.aiConverter = aiConverter;
         }
 
         public void ConvertAIToPNG(List<string> files, List<ImageSize> imageSizes, string saveLocation)
@@ -35,14 +30,14 @@ namespace Domain
                 string fileName = Path.GetFileNameWithoutExtension(file);
                 string outputSaveLocation = Path.Combine(saveLocation, fileName);
 
-                string svgFile = _aiConverter.ConvertToSVG(file, outputSaveLocation);
+                string svgFile = aiConverter.ConvertToSVG(file, outputSaveLocation);
 
                 foreach (ImageSize imageSize in imageSizes)
                 {
                     string fileSaveLocation =
                         Path.Combine(outputSaveLocation, $"{fileName}_{imageSize.Width}x{imageSize.Height}.png");
 
-                    _svgConverter.ConvertToPNG(svgFile, imageSize.ToSize(), fileSaveLocation);
+                    svgConverter.ConvertToPNG(svgFile, imageSize.ToSize(), fileSaveLocation);
                 }
             }
         }
@@ -61,7 +56,7 @@ namespace Domain
                     var fileSaveLocation =
                         Path.Combine(outputSaveLocation, $"{fileName}_{imageSize.Width}x{imageSize.Height}.png");
 
-                    _svgConverter.ConvertToPNG(file, imageSize.ToSize(), fileSaveLocation);
+                    svgConverter.ConvertToPNG(file, imageSize.ToSize(), fileSaveLocation);
                 }
             }
         }

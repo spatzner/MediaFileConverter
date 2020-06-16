@@ -52,15 +52,38 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Factories\_IIllustratorFactory.cs" />
+    <Compile Include="Factories\IllustratorFactory.cs" />
     <Compile Include="Providers\DateTimeProvider.cs" />
+    <Compile Include="Providers\FileProvider.cs" />
+    <Compile Include="Wrappers\_IIllustratorWrapper.cs" />
+    <Compile Include="Wrappers\IllustratorWrapper.cs" />
+    <Compile Include="Providers\_IFileSystemProvider.cs" />
     <Compile Include="Providers\_IDateTimeProvider.cs" />
     <Compile Include="InfrastructureModule.cs" />
-    <Compile Include="Providers\SVGProvider.cs" />
-    <Compile Include="Providers\_ISVGProvider.cs" />
+    <Compile Include="Wrappers\SVGWrapper.cs" />
+    <Compile Include="Wrappers\_ISVGWrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Illustrator">
+      <Guid>{4342E6A9-F5E0-4580-9F31-5149C20DE298}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Utilities\Utilities.csproj">
+      <Project>{86418748-F0CE-4A9E-8BFE-4FF7D07AFC8C}</Project>
+      <Name>Utilities</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

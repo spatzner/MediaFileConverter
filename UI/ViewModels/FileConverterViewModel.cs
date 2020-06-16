@@ -33,7 +33,7 @@ namespace UI.ViewModels
         {
             var saveLocation = SaveLocation;
             if (SaveLocation == _defaultSaveLocation)
-                saveLocation = Path.Combine(SaveLocation, $"FileExporter{DateTime.Now:yyyyMMddmmhhss}");
+                saveLocation = Path.Combine(SaveLocation, $"MediaExporter{DateTime.Now:yyyyMMddhhmmss}");
 
             _fileConverter.ConvertFiles(FilesToConvert, selectedResolutions, saveLocation);
         }

@@ -170,26 +170,6 @@ namespace UnitTests.Application
 
         [TestMethod]
         [TestCategory(TestCategories.Unit)]
-        public void ConvertFiles_WhenSaveLocationIsDefault_AddsFileConverterDirectory()
-        {
-            //Arrange
-            DateTime dateTimeNow = new DateTime(2020, 6, 14, 1, 2, 3);
-            string expectedSaveLocation = fakeSaveLocation + $"\\FileConverter{dateTimeNow:yyyyMMddhhmmss}";
-
-            mockDateTimeProvider.Setup(x => x.Now).Returns(dateTimeNow);
-
-            sut = CreateValidFileConverter();
-
-            //Act
-            sut.ConvertFiles(fakeFilesToConvert, fakeResolutions, fakeSaveLocation);
-
-            //Assert
-            mockFileProcessor.Verify(x =>
-                x.ConvertSVGToPNG(It.IsAny<List<string>>(), It.IsAny<List<ImageSize>>(), expectedSaveLocation));
-        }
-
-        [TestMethod]
-        [TestCategory(TestCategories.Unit)]
         public void ConvertFiles_WhenSaveLocationIsNotDefault_UsesVerbatim()
         {
             //Arrange

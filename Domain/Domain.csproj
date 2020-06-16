@@ -75,6 +75,10 @@
       <Project>{a25d8d21-4fdb-4ab6-a0c0-380dcaa49c32}</Project>
       <Name>Infrastructure</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Utilities\Utilities.csproj">
+      <Project>{86418748-F0CE-4A9E-8BFE-4FF7D07AFC8C}</Project>
+      <Name>Utilities</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="Illustrator">

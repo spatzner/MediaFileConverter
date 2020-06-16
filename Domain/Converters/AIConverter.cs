@@ -2,38 +2,51 @@
 using System.Diagnostics.SymbolStore;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Web.UI.WebControls;
 using Illustrator;
+using Infrastructure.Factories;
+using Infrastructure.Providers;
+using Utilities;
 
 namespace Domain.Converters
 {
     public class AIConverter : IAIConverter
     {
+        private readonly IIllustratorProviderFactory illustratorProviderFactory;
+        private readonly IFileSystemProvider fileSystemProvider;
+
+        public AIConverter(IIllustratorProviderFactory illustratorProviderFactory, IFileSystemProvider fileSystemProvider)
+        {
+            this.illustratorProviderFactory = illustratorProviderFactory;
+            this.fileSystemProvider = fileSystemProvider;
+
+            CheckIfArgument.IsNull(nameof(this.illustratorProviderFactory), this.illustratorProviderFactory);
+            CheckIfArgument.IsNull(nameof(this.fileSystemProvider), this.fileSystemProvider);
+        }
+
+
         public string ConvertToSVG(string file, string saveDirectory)
         {
-            var illustrator = new Application();
+            string fileName = fileSystemProvider.GetFileNameWithoutExtension(file);
 
-            Directory.CreateDirectory(saveDirectory);
+            using (var illustrator = illustratorProviderFactory.Create())
+            {
 
-            illustrator.Open(file);
+                fileSystemProvider.CreateDirectory(saveDirectory);
 
-            string fileName = Path.GetFileNameWithoutExtension(file);
+                illustrator.Open(file);
 
-            Document doc = illustrator.Open(file);
+                Document doc = illustrator.Open(file);
 
-            var artBoards = illustrator.ActiveDocument.Artboards.GetEnumerator();
-            artBoards.MoveNext();
+                Artboard artBoard = illustrator.GetArtBoards().First();
+                artBoard.Name = fileName;
 
-            Artboard artBoard = artBoards.Current as Artboard;
-            artBoard.Name = fileName;
-
-            doc.ExportForScreens(saveDirectory, AiExportForScreensType.aiSE_SVG);
-            doc.Close(AiSaveOptions.aiDoNotSaveChanges);
-            doc = null;
-
-            illustrator.Quit();
-            illustrator = null;
+                doc.ExportForScreens(saveDirectory, AiExportForScreensType.aiSE_SVG);
+                doc.Close(AiSaveOptions.aiDoNotSaveChanges);
+            }
 
             return Path.Combine(saveDirectory, "SVG", $"{fileName}.svg");
         }
