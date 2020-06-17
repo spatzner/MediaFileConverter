@@ -104,6 +104,18 @@ namespace UnitTests.Application
                 string.Empty);
         }
 
+        [TestMethod]
+        [TestCategory(TestCategories.Unit)]
+        public void Constructor_WhenCalled_MapsFileProcessorCorrectly()
+        {
+            sut = new FileConverter(mockFileProcessor.Object,
+                mockDateTimeProvider.Object,
+                fakeResolutions,
+                string.Empty);
+
+
+        }
+
         #endregion Constructor Tests
 
         #region ConvertFiles Tests

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using Domain.Models;
+using Utilities;
 
 namespace Applications
 {
@@ -12,6 +13,11 @@ namespace Applications
 
         public Resolution(float widthInches, float heightInches, int dpi)
         {
+
+            CheckIfArgument.IsPositive(nameof(widthInches), widthInches);
+            CheckIfArgument.IsPositive(nameof(heightInches), heightInches);
+            CheckIfArgument.IsPositive(nameof(dpi), dpi);
+
             Width = widthInches;
             Height = heightInches;
             DPI = dpi;
@@ -20,7 +26,6 @@ namespace Applications
         //TODO: use AutoMapper
         public ImageSize ConvertToImageSize()
         {
-
             return new ImageSize(Width, Height, DPI);
         }
 

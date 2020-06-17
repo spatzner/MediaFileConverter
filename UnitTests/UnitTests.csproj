@@ -72,6 +72,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Application\FileConverterTests.cs" />
+    <Compile Include="Application\ResolutionTests.cs" />
+    <Compile Include="TestUtilities\ReflectionUtilities.cs" />
     <Compile Include="TestUtilities\TestCategories.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

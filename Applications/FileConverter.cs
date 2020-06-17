@@ -24,15 +24,15 @@ namespace Applications
             List<Resolution> suppliedResolutions, 
             string defaultSaveLocation)
         {
+            CheckIfArgument.IsNull(nameof(fileProcessor), fileProcessor);
+            CheckIfArgument.IsNull(nameof(dateTimeProvider), dateTimeProvider);
+            CheckIfArgument.IsNullOrEmpty(nameof(defaultSaveLocation), defaultSaveLocation);
+            CheckIfArgument.IsNullOrEmpty(nameof(suppliedResolutions), suppliedResolutions);
+
             this.fileProcessor = fileProcessor;
             this.dateTimeProvider = dateTimeProvider;
             this.defaultSaveLocation = defaultSaveLocation;
             this.suppliedResolutions = suppliedResolutions;
-
-            CheckIfArgument.IsNull(nameof(this.fileProcessor), this.fileProcessor);
-            CheckIfArgument.IsNull(nameof(this.dateTimeProvider),this.dateTimeProvider);
-            CheckIfArgument.IsNullOrEmpty(nameof(this.defaultSaveLocation), this.defaultSaveLocation);
-            CheckIfArgument.IsNullOrEmpty(nameof(this.suppliedResolutions), this.suppliedResolutions);
         }
 
         public void ConvertFiles(List<string> filesToConvert, List<Resolution> selectedResolutions, string saveLocation)

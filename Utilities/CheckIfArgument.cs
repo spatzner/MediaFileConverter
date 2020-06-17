@@ -30,5 +30,22 @@ namespace Utilities
             if(string.IsNullOrEmpty(argumentValue))
                 throw new ArgumentException($"{argumentName} cannot be empty");
         }
+
+        public static void IsPositive(string argumentName, float argumentValue)
+        {
+            if(argumentValue <= 0)
+                ThrowPositiveNumberException(argumentName);
+        }
+
+        public static void IsPositive(string argumentName, int argumentValue)
+        {
+            if (argumentValue <= 0)
+                ThrowPositiveNumberException(argumentName);
+        }
+
+        private static void ThrowPositiveNumberException(string argumentName)
+        {
+            throw new ArgumentException($"{argumentName} must be a positive number");
+        }
     }
     }

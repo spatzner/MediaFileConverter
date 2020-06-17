@@ -71,9 +71,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Illustrator\Illustrator.csproj">
-      <Project>{1f7b923f-4038-433a-8b04-a401cc21760c}</Project>
-      <Name>Illustrator</Name>
+    <ProjectReference Include="..\IllustratorFake\IllustratorFake.csproj">
+      <Project>{6c3b1187-cf33-4b28-b1c7-ac699801a191}</Project>
+      <Name>IllustratorFake</Name>
     </ProjectReference>
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj">
       <Project>{a25d8d21-4fdb-4ab6-a0c0-380dcaa49c32}</Project>
