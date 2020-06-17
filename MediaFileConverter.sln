@@ -15,6 +15,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Applications
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utilities", "Utilities\Utilities.csproj", "{86418748-F0CE-4A9E-8BFE-4FF7D07AFC8C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Illustrator", "Illustrator\Illustrator.csproj", "{1F7B923F-4038-433A-8B04-A401CC21760C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IllustratorFake", "IllustratorFake\IllustratorFake.csproj", "{6C3B1187-CF33-4B28-B1C7-AC699801A191}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +49,14 @@ Global
 		{86418748-F0CE-4A9E-8BFE-4FF7D07AFC8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{86418748-F0CE-4A9E-8BFE-4FF7D07AFC8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{86418748-F0CE-4A9E-8BFE-4FF7D07AFC8C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F7B923F-4038-433A-8B04-A401CC21760C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F7B923F-4038-433A-8B04-A401CC21760C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F7B923F-4038-433A-8B04-A401CC21760C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F7B923F-4038-433A-8B04-A401CC21760C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C3B1187-CF33-4B28-B1C7-AC699801A191}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C3B1187-CF33-4B28-B1C7-AC699801A191}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C3B1187-CF33-4B28-B1C7-AC699801A191}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C3B1187-CF33-4B28-B1C7-AC699801A191}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

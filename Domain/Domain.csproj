@@ -71,6 +71,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Illustrator\Illustrator.csproj">
+      <Project>{1f7b923f-4038-433a-8b04-a401cc21760c}</Project>
+      <Name>Illustrator</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj">
       <Project>{a25d8d21-4fdb-4ab6-a0c0-380dcaa49c32}</Project>
       <Name>Infrastructure</Name>
@@ -79,17 +83,6 @@
       <Project>{86418748-F0CE-4A9E-8BFE-4FF7D07AFC8C}</Project>
       <Name>Utilities</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <COMReference Include="Illustrator">
-      <Guid>{4342E6A9-F5E0-4580-9F31-5149C20DE298}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
