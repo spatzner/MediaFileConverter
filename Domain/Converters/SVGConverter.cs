@@ -1,39 +1,38 @@
 ﻿using System.Drawing;
-using System.Drawing.Imaging;
-using System.IO;
-using Infrastructure;
+using Domain.Converters;
 using Infrastructure.Providers;
 using Infrastructure.Wrappers;
 using Svg;
 using Utilities;
 
-namespace Domain.Converters
+namespace Domain
 {
     public class SVGConverter : ISVGConverter
     {
-        private readonly ISVGWrapper isvgDocumentWrapper;
+        private readonly ISVGWrapper svgDocumentWrapper;
+        private readonly IBitmapWrapper bitmapWrapper;
+        private readonly IFileSystemProvider fileSystemProvider;
 
-
-        public SVGConverter(ISVGWrapper isvgDocumentWrapper)
+        public SVGConverter(ISVGWrapper svgDocumentWrapper, IBitmapWrapper bitmapWrapper, IFileSystemProvider fileSystemProvider)
         {
-            this.isvgDocumentWrapper = isvgDocumentWrapper;
+            CheckIfArgument.IsNull(nameof(svgDocumentWrapper), svgDocumentWrapper);
+            CheckIfArgument.IsNull(nameof(bitmapWrapper), bitmapWrapper);
+            CheckIfArgument.IsNull(nameof(fileSystemProvider), fileSystemProvider);
 
-            CheckIfArgument.IsNull(nameof(this.isvgDocumentWrapper), this.isvgDocumentWrapper);
+            this.svgDocumentWrapper = svgDocumentWrapper;
+            this.bitmapWrapper = bitmapWrapper;
+            this.fileSystemProvider = fileSystemProvider;
         }
 
         public void ConvertToPNG(string file, Size size, string saveLocation)
         {
-            var dir = Path.GetDirectoryName(saveLocation);
-            Directory.CreateDirectory(dir);
+            var dir = fileSystemProvider.GetDirectoryName(saveLocation);
+            fileSystemProvider.CreateDirectory(dir);
 
             SvgDocument svgDocument = GetDocument(file);
             Size internSize = OrientSize(size, svgDocument);
 
-            using (Bitmap bitmap = new Bitmap(internSize.Width, internSize.Height))
-            {
-                svgDocument.Draw(bitmap);
-                bitmap.Save(saveLocation, ImageFormat.Png);
-            }
+            bitmapWrapper.CreatePNG(saveLocation, internSize, svgDocument);
         }
 
         private static Size OrientSize(Size size, SvgDocument svgDocument)
@@ -45,7 +44,7 @@ namespace Domain.Converters
 
         private SvgDocument GetDocument(string file)
         {
-            return isvgDocumentWrapper.GetDocument(file, new SvgAspectRatio(SvgPreserveAspectRatio.none, false));
+            return svgDocumentWrapper.GetDocument(file, new SvgAspectRatio(SvgPreserveAspectRatio.none, false));
         }
     }
 }

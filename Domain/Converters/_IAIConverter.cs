@@ -1,4 +1,4 @@
-﻿namespace Domain.Converters
+﻿namespace Domain
 {
     public interface IAIConverter
     {

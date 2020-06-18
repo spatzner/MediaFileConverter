@@ -1,22 +1,17 @@
-﻿using System.IO;
-using Illustrator;
-using Infrastructure.Providers;
+﻿using Illustrator;
 using Utilities;
 
-namespace Domain.Converters
+namespace Domain
 {
     public class AIConverter : IAIConverter
     {
         private readonly IIllustratorProvider illustratorProvider;
-        private readonly IFileSystemProvider fileSystemProvider;
 
-        public AIConverter(IIllustratorProvider illustratorProvider, IFileSystemProvider fileSystemProvider)
+        public AIConverter(IIllustratorProvider illustratorProvider)
         {
-            this.illustratorProvider = illustratorProvider;
-            this.fileSystemProvider = fileSystemProvider;
+            CheckIfArgument.IsNull(nameof(illustratorProvider), illustratorProvider);
 
-            CheckIfArgument.IsNull(nameof(this.illustratorProvider), this.illustratorProvider);
-            CheckIfArgument.IsNull(nameof(this.fileSystemProvider), this.fileSystemProvider);
+            this.illustratorProvider = illustratorProvider;
         }
 
         public string ConvertToSVG(string file, string saveDirectory)

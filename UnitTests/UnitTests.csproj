@@ -73,6 +73,8 @@
   <ItemGroup>
     <Compile Include="Application\FileConverterTests.cs" />
     <Compile Include="Application\ResolutionTests.cs" />
+    <Compile Include="Domain\AIConverterTests.cs" />
+    <Compile Include="Domain\SVGConverterTests.cs" />
     <Compile Include="TestUtilities\ReflectionUtilities.cs" />
     <Compile Include="TestUtilities\TestCategories.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -86,6 +88,10 @@
       <Project>{3b85821e-49cf-42f5-a7ae-42c21631f0b9}</Project>
       <Name>Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\IllustratorFake\IllustratorFake.csproj">
+      <Project>{6c3b1187-cf33-4b28-b1c7-ac699801a191}</Project>
+      <Name>IllustratorFake</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj">
       <Project>{a25d8d21-4fdb-4ab6-a0c0-380dcaa49c32}</Project>
       <Name>Infrastructure</Name>
@@ -93,6 +99,10 @@
     <ProjectReference Include="..\UI\UI.csproj">
       <Project>{18c5220c-d40c-48a7-9300-870203fff677}</Project>
       <Name>UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Utilities\Utilities.csproj">
+      <Project>{86418748-f0ce-4a9e-8bfe-4ff7d07afc8c}</Project>
+      <Name>Utilities</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

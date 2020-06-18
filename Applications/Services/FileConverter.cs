@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
 using System.Linq;
 using Domain;
-using Domain.Models;
-using Infrastructure.Providers;
 using Utilities;
 
 namespace Applications
@@ -15,23 +11,15 @@ namespace Applications
         public IReadOnlyCollection<Resolution> SuppliedResolutions => suppliedResolutions.AsReadOnly();
   
         private readonly List<Resolution> suppliedResolutions;
-        private readonly string defaultSaveLocation;
         private readonly IFileProcessor fileProcessor;
-        private readonly IDateTimeProvider dateTimeProvider;
 
         public FileConverter(IFileProcessor fileProcessor, 
-            IDateTimeProvider dateTimeProvider, 
-            List<Resolution> suppliedResolutions, 
-            string defaultSaveLocation)
+            List<Resolution> suppliedResolutions)
         {
             CheckIfArgument.IsNull(nameof(fileProcessor), fileProcessor);
-            CheckIfArgument.IsNull(nameof(dateTimeProvider), dateTimeProvider);
-            CheckIfArgument.IsNullOrEmpty(nameof(defaultSaveLocation), defaultSaveLocation);
             CheckIfArgument.IsNullOrEmpty(nameof(suppliedResolutions), suppliedResolutions);
 
             this.fileProcessor = fileProcessor;
-            this.dateTimeProvider = dateTimeProvider;
-            this.defaultSaveLocation = defaultSaveLocation;
             this.suppliedResolutions = suppliedResolutions;
         }
 

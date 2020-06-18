@@ -1,16 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.Design;
-using System.Globalization;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using Applications;
-using Castle.Components.DictionaryAdapter;
 using Domain;
-using Domain.Models;
-using Infrastructure.Providers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using UnitTests.TestUtilities;
@@ -23,7 +15,7 @@ namespace UnitTests.Application
         #region Initialization
 
         private Mock<IFileProcessor> mockFileProcessor;
-        private Mock<IDateTimeProvider> mockDateTimeProvider;
+
         private string fakeSaveLocation;
         private List<Resolution> fakeResolutions;
         private List<string> fakeFilesToConvert;
@@ -34,7 +26,6 @@ namespace UnitTests.Application
         public void TestInitialize()
         {
             mockFileProcessor = new Mock<IFileProcessor>();
-            mockDateTimeProvider = new Mock<IDateTimeProvider>();
             fakeSaveLocation = "SaveLocation";
             fakeResolutions = new List<Resolution> {new Resolution(6, 4, 300)};
             fakeFilesToConvert = new List<string>{"FakeFileLocation"};
@@ -49,15 +40,7 @@ namespace UnitTests.Application
         [ExpectedException(typeof(ArgumentNullException))]
         public void Constructor_WhenFileProcessorIsNull_ThrowsException()
         {
-            sut = new FileConverter(null, mockDateTimeProvider.Object, fakeResolutions, fakeSaveLocation);
-        }
-
-        [TestMethod]
-        [TestCategory(TestCategories.Unit)]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void Constructor_WhenDateTimeProviderIsNull_ThrowsException()
-        {
-            sut = new FileConverter(mockFileProcessor.Object, null, fakeResolutions, fakeSaveLocation);
+            sut = new FileConverter(null, fakeResolutions);
         }
 
         [TestMethod]
@@ -65,10 +48,7 @@ namespace UnitTests.Application
         [ExpectedException(typeof(ArgumentNullException))]
         public void Constructor_WhenSuppliedResolutionIsNull_ThrowsException()
         {
-            sut = new FileConverter(mockFileProcessor.Object,
-                mockDateTimeProvider.Object,
-                null,
-                fakeSaveLocation);
+            sut = new FileConverter(mockFileProcessor.Object, null);
         }
 
         [TestMethod]
@@ -76,44 +56,7 @@ namespace UnitTests.Application
         [ExpectedException(typeof(ArgumentException))]
         public void Constructor_WhenSuppliedResolutionIsEmpty_ThrowsException()
         {
-            sut = new FileConverter(mockFileProcessor.Object,
-                mockDateTimeProvider.Object,
-                new List<Resolution>(),
-                fakeSaveLocation);
-        }
-
-        [TestMethod]
-        [TestCategory(TestCategories.Unit)]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void Constructor_WhenDefaultSaveLocationIsNull_ThrowsException()
-        {
-            sut = new FileConverter(mockFileProcessor.Object,
-                mockDateTimeProvider.Object,
-                fakeResolutions,
-                null);
-        }
-
-        [TestMethod]
-        [TestCategory(TestCategories.Unit)]
-        [ExpectedException(typeof(ArgumentException))]
-        public void Constructor_WhenDefaultSaveLocationIsEmpty_ThrowsException()
-        {
-            sut = new FileConverter(mockFileProcessor.Object,
-                mockDateTimeProvider.Object,
-                fakeResolutions,
-                string.Empty);
-        }
-
-        [TestMethod]
-        [TestCategory(TestCategories.Unit)]
-        public void Constructor_WhenCalled_MapsFileProcessorCorrectly()
-        {
-            sut = new FileConverter(mockFileProcessor.Object,
-                mockDateTimeProvider.Object,
-                fakeResolutions,
-                string.Empty);
-
-
+            sut = new FileConverter(mockFileProcessor.Object, new List<Resolution>());
         }
 
         #endregion Constructor Tests
@@ -233,13 +176,6 @@ namespace UnitTests.Application
                     It.IsAny<string>()));
         }
 
-
-
-
-
-
-
-
         #endregion ConvertFiles Tests
 
         #region AddSuppliedResolution Tests
@@ -260,7 +196,7 @@ namespace UnitTests.Application
 
         private FileConverter CreateValidFileConverter()
         {
-            return new FileConverter(mockFileProcessor.Object, mockDateTimeProvider.Object, fakeResolutions, fakeSaveLocation);
+            return new FileConverter(mockFileProcessor.Object, fakeResolutions);
         }
 
         #endregion Private Members

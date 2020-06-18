@@ -18,5 +18,10 @@ namespace Infrastructure.Providers
         {
             return Path.GetFileNameWithoutExtension(file);
         }
+
+        public string GetDirectoryName(string path)
+        {
+            return Path.GetDirectoryName(path);
+        }
     }
 }

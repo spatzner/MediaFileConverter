@@ -6,7 +6,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Domain.Converters;
-using Domain.Models;
 using Utilities;
 
 namespace Domain

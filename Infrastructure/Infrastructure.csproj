@@ -53,11 +53,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Providers\DateTimeProvider.cs" />
-    <Compile Include="Providers\FileProvider.cs" />
+    <Compile Include="Providers\FileSystemProvider.cs" />
     <Compile Include="Providers\_IFileSystemProvider.cs" />
     <Compile Include="Providers\_IDateTimeProvider.cs" />
     <Compile Include="InfrastructureModule.cs" />
+    <Compile Include="Wrappers\BitmapWrapper.cs" />
     <Compile Include="Wrappers\SVGWrapper.cs" />
+    <Compile Include="Wrappers\_IBitmapWrapper.cs" />
     <Compile Include="Wrappers\_ISVGWrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

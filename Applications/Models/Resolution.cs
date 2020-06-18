@@ -1,6 +1,4 @@
-﻿using System;
-using System.Drawing;
-using Domain.Models;
+﻿using Domain;
 using Utilities;
 
 namespace Applications
