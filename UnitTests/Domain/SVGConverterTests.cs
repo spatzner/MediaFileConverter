@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.Contracts;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Drawing;
 using Domain;
 using Domain.Converters;
 using Infrastructure.Providers;
 using Infrastructure.Wrappers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using Svg;
 using UnitTests.TestUtilities;
 
 namespace UnitTests.Domain
@@ -26,12 +23,25 @@ namespace UnitTests.Domain
         private Mock<IBitmapWrapper> mockBitmapWrapper;
         private Mock<IFileSystemProvider> mockFileSystemProvider;
 
+        private SvgDocument svgDocument;
+        private string saveLocation;
+        private string file;
+
         [TestInitialize]
         public void TestInitialize()
         {
             mockSVGDocumentWrapper = new Mock<ISVGWrapper>();
             mockBitmapWrapper = new Mock<IBitmapWrapper>();
             mockFileSystemProvider = new Mock<IFileSystemProvider>();
+
+            saveLocation = "//Some/location";
+            file = $"{saveLocation}/file.svg";
+
+            svgDocument = new SvgDocument
+            {
+                Width = new SvgUnit(SvgUnitType.Pixel, 1),
+                Height = new SvgUnit(SvgUnitType.Pixel, 1)
+            };
         }
 
         #endregion Initialization
@@ -70,10 +80,82 @@ namespace UnitTests.Domain
         [TestCategory(TestCategories.Unit)]
         public void ConvertToPNG_WhenCalled_CreatesSaveLocation()
         {
+            //Arrange
+            mockFileSystemProvider.Setup(x => x.GetDirectoryName(file)).Returns(saveLocation);
+            mockSVGDocumentWrapper.Setup(x => x.GetDocument(It.IsAny<string>(), It.IsAny<SvgAspectRatio>())).Returns(svgDocument);
+
             sut = CreateValidSVGConverter();
 
-            throw new NotImplementedException();
+            //Act
+            sut.ConvertToPNG(file, new Size(1, 1), saveLocation);
 
+            //Assert
+            mockFileSystemProvider.Verify(x => x.CreateDirectory(saveLocation));
+        }
+
+        [TestMethod]
+        [TestCategory(TestCategories.Unit)]
+        public void ConvertToPNG_WhenCalled_GetsDocumentCorrectly()
+        {
+            //Arrange
+            mockFileSystemProvider.Setup(x => x.GetDirectoryName(file)).Returns(saveLocation);
+            mockSVGDocumentWrapper.Setup(x => x.GetDocument(It.IsAny<string>(), It.IsAny<SvgAspectRatio>())).Returns(svgDocument);
+
+            sut = CreateValidSVGConverter();
+
+            //Act
+            sut.ConvertToPNG(file, new Size(1, 1), saveLocation);
+
+            //Assert
+            mockSVGDocumentWrapper.Verify(x => x.GetDocument(file,
+                It.Is<SvgAspectRatio>(y => y.Align == SvgPreserveAspectRatio.none && y.Slice == false)));
+        }
+
+        [TestMethod]
+        [TestCategory(TestCategories.Unit)]
+        public void ConvertToPNG_WhenSvgAndSizeDoNotMatch_FlipsSizeDimensions()
+        {
+            //Arrange
+            Size size = new Size(1, 2);
+
+            svgDocument.Width = new SvgUnit(SvgUnitType.Pixel, size.Height);
+            svgDocument.Height = new SvgUnit(SvgUnitType.Pixel, size.Width);
+
+            mockFileSystemProvider.Setup(x => x.GetDirectoryName(file)).Returns(saveLocation);
+            mockSVGDocumentWrapper.Setup(x => x.GetDocument(It.IsAny<string>(), It.IsAny<SvgAspectRatio>())).Returns(svgDocument);
+            
+
+            sut = CreateValidSVGConverter();
+
+            //Act
+            sut.ConvertToPNG(file, new Size(2, 1), saveLocation);
+
+            //Assert
+            mockBitmapWrapper.Verify(x => x.CreatePNG(It.IsAny<string>(),
+                It.Is<Size>(y => y.Height == size.Width && y.Width == size.Height), It.IsAny<SvgDocument>()));
+        }
+
+        [TestMethod]
+        [TestCategory(TestCategories.Unit)]
+        public void ConvertToPNG_Called_CreatesPNGCorrectly()
+        {
+            //Arrange
+            Size size = new Size(1, 2);
+
+            svgDocument.Width = new SvgUnit(SvgUnitType.Pixel, size.Width);
+            svgDocument.Height = new SvgUnit(SvgUnitType.Pixel, size.Height);
+
+            mockFileSystemProvider.Setup(x => x.GetDirectoryName(file)).Returns(saveLocation);
+            mockSVGDocumentWrapper.Setup(x => x.GetDocument(It.IsAny<string>(), It.IsAny<SvgAspectRatio>())).Returns(svgDocument);
+
+
+            sut = CreateValidSVGConverter();
+
+            //Act
+            sut.ConvertToPNG(file, size, saveLocation);
+
+            //Assert
+            mockBitmapWrapper.Verify(x => x.CreatePNG(saveLocation, size, svgDocument));
         }
 
         #endregion ConvertToPNG Tests

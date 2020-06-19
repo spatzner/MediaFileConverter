@@ -26,8 +26,7 @@ namespace Domain
 
         public void ConvertToPNG(string file, Size size, string saveLocation)
         {
-            var dir = fileSystemProvider.GetDirectoryName(saveLocation);
-            fileSystemProvider.CreateDirectory(dir);
+            fileSystemProvider.CreateDirectory(saveLocation);
 
             SvgDocument svgDocument = GetDocument(file);
             Size internSize = OrientSize(size, svgDocument);
