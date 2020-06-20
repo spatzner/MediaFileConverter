@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using Utilities;
 
 namespace Domain
 {
@@ -13,6 +14,10 @@ namespace Domain
 
         public ImageSize(float width, float height, int dpi)
         {
+            CheckIfArgument.IsPositive(nameof(width), width);
+            CheckIfArgument.IsPositive(nameof(height), height);
+            CheckIfArgument.IsPositive(nameof(dpi), dpi);
+
             Width = width;
             Height = height;
             DPI = dpi;
@@ -22,6 +27,10 @@ namespace Domain
 
         public ImageSize(int pixelWidth, int pixelHeight, int dpi)
         {
+            CheckIfArgument.IsPositive(nameof(pixelWidth), pixelWidth);
+            CheckIfArgument.IsPositive(nameof(pixelHeight), pixelHeight);
+            CheckIfArgument.IsPositive(nameof(dpi), dpi);
+
             PixelWidth = pixelWidth;
             PixelHeight = pixelHeight;
             DPI = dpi;

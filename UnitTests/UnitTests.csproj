@@ -83,6 +83,7 @@
     <Compile Include="Application\FileConverterTests.cs" />
     <Compile Include="Application\ResolutionTests.cs" />
     <Compile Include="Domain\AIConverterTests.cs" />
+    <Compile Include="Domain\ImageSizeTests.cs" />
     <Compile Include="Domain\SVGConverterTests.cs" />
     <Compile Include="TestUtilities\ReflectionUtilities.cs" />
     <Compile Include="TestUtilities\TestCategories.cs" />
