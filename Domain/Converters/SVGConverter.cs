@@ -1,9 +1,9 @@
 ﻿using System.Drawing;
+using Core;
 using Domain.Converters;
 using Infrastructure.Providers;
 using Infrastructure.Wrappers;
 using Svg;
-using Utilities;
 
 namespace Domain
 {

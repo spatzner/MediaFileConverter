@@ -12,12 +12,10 @@ using UnitTests.TestUtilities;
 namespace UnitTests.Domain
 {
     [TestClass]
-    public class SVGConverterTests
+    public class SVGConverterTests : Test<SVGConverter>
     {
 
         #region Initialization
-
-        private SVGConverter sut;
 
         private Mock<ISVGWrapper> mockSVGDocumentWrapper;
         private Mock<IBitmapWrapper> mockBitmapWrapper;
@@ -27,8 +25,7 @@ namespace UnitTests.Domain
         private string saveLocation;
         private string file;
 
-        [TestInitialize]
-        public void TestInitialize()
+        public override void TestInitialize()
         {
             mockSVGDocumentWrapper = new Mock<ISVGWrapper>();
             mockBitmapWrapper = new Mock<IBitmapWrapper>();

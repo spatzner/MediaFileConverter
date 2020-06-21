@@ -68,9 +68,9 @@
       <Project>{A25D8D21-4FDB-4AB6-A0C0-380DCAA49C32}</Project>
       <Name>Infrastructure</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Utilities\Utilities.csproj">
+    <ProjectReference Include="..\Utilities\Core.csproj">
       <Project>{86418748-f0ce-4a9e-8bfe-4ff7d07afc8c}</Project>
-      <Name>Utilities</Name>
+      <Name>Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

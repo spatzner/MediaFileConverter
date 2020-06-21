@@ -4,22 +4,25 @@ using Domain.Converters;
 using Illustrator;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using Ninject.Activation.Strategies;
 using UnitTests.TestUtilities;
 
 namespace UnitTests.Domain
 {
     [TestClass]
-    public class AIConverterTests
+    public class AIConverterTests : Test<AIConverter>
     {
-        private AIConverter sut;
+        #region Initialization
+
 
         private Mock<IIllustratorProvider> mockIllustratorProvider;
 
-        [TestInitialize]
-        public void TestInitialize()
+        public override void TestInitialize()
         {
             mockIllustratorProvider = new Mock<IIllustratorProvider>();
         }
+
+        #endregion Initialization
 
         #region Constructor Tests
 

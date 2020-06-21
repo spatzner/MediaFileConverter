@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web.UI.WebControls;
 using Domain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using UnitTests.TestUtilities;
@@ -12,9 +7,15 @@ using UnitTests.TestUtilities;
 namespace UnitTests.Domain
 {
     [TestClass]
-    public class ImageSizeTests
+    public class ImageSizeTests : Test<ImageSize>
     {
-        private ImageSize sut;
+        #region Initialization
+
+        public override void TestInitialize()
+        {
+        }
+
+        #endregion Initialization
 
         #region Float Construtor Tests
 

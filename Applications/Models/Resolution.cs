@@ -1,5 +1,5 @@
-﻿using Domain;
-using Utilities;
+﻿using Core;
+using Domain;
 
 namespace Applications
 {

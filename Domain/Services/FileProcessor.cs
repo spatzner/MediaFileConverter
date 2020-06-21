@@ -5,8 +5,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Core;
 using Domain.Converters;
-using Utilities;
 
 namespace Domain
 {
@@ -17,6 +17,9 @@ namespace Domain
 
         public FileProcessor(ISVGConverter svgConverter, IAIConverter aiConverter)
         {
+            CheckIfArgument.IsNull(nameof(svgConverter), svgConverter);
+            CheckIfArgument.IsNull(nameof(aiConverter), aiConverter);
+
             this.svgConverter = svgConverter;
             this.aiConverter = aiConverter;
         }

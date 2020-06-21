@@ -10,7 +10,7 @@ using UnitTests.TestUtilities;
 namespace UnitTests.Application
 {
     [TestClass]
-    public class FileConverterTests
+    public class FileConverterTests : Test<FileConverter>
     {
         #region Initialization
 
@@ -20,10 +20,7 @@ namespace UnitTests.Application
         private List<Resolution> fakeResolutions;
         private List<string> fakeFilesToConvert;
 
-        private FileConverter sut;
-
-        [TestInitialize]
-        public void TestInitialize()
+        public override void TestInitialize()
         {
             mockFileProcessor = new Mock<IFileProcessor>();
             fakeSaveLocation = "SaveLocation";

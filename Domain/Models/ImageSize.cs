@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Drawing;
-using Utilities;
+using Core;
 
 
 //this base class is adapted from from Jimmy Bogard

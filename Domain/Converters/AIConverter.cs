@@ -1,5 +1,5 @@
-﻿using Illustrator;
-using Utilities;
+﻿using Core;
+using Illustrator;
 
 namespace Domain
 {

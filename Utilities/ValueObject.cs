@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace Domain
+namespace Core
 {
+    //this base class comes from Jimmy Bogard
+    //http://grabbagoft.blogspot.com/2007/06/generic-value-object-equality.html
+
     public abstract class ValueObject<T> : IEquatable<T>
         where T : ValueObject<T>
     {

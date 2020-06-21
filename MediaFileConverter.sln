@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\Unit
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Applications\Application.csproj", "{C8A7C3B5-14E5-49C5-99A9-E052436A3473}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utilities", "Utilities\Utilities.csproj", "{86418748-F0CE-4A9E-8BFE-4FF7D07AFC8C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Utilities\Core.csproj", "{86418748-F0CE-4A9E-8BFE-4FF7D07AFC8C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Illustrator", "Illustrator\Illustrator.csproj", "{1F7B923F-4038-433A-8B04-A401CC21760C}"
 EndProject
