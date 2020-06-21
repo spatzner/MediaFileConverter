@@ -130,8 +130,87 @@ namespace UnitTests.Domain
             sut = new ImageSize((int)1, 1, 0);
         }
 
+        [TestMethod]
+        [TestCategory(TestCategories.Unit)]
+        public void ConstructorPixel_WhenArgumentsAreValid_AssignsPixelWidthCorrectly()
+        {
+            //Arrange
+            int expected = 3;
+
+            //Act
+            sut = new ImageSize(expected, 1, 1);
+
+            //Assert
+            Assert.AreEqual(expected, sut.PixelWidth);
+
+        }
+
+        [TestMethod]
+        [TestCategory(TestCategories.Unit)]
+        public void ConstructorPixel_WhenArgumentsAreValid_AssignsPixelHeightCorrectly()
+        {
+            //Arrange
+            int expected = 3;
+
+            //Act
+            sut = new ImageSize(1, expected, 1);
+
+            //Assert
+            Assert.AreEqual(expected, sut.PixelHeight);
+        }
+
+        [TestMethod]
+        [TestCategory(TestCategories.Unit)]
+        public void ConstructorPixel_WhenArgumentsAreValid_AssignsDpiCorrectly()
+        {
+            //Arrange
+            int expected = 3;
+
+            //Act
+            sut = new ImageSize(1, 1, expected);
+
+            //Assert
+            Assert.AreEqual(expected, sut.DPI);
+        }
+        
+        [TestMethod]
+        [TestCategory(TestCategories.Unit)]
+        public void ConstructorPixel_WhenArgumentsAreValid_CorrectlyConvertsWidth()
+        {
+            //Arrange
+            int width = 3;
+            int dpi = 6;
+
+            float expected = (float) width / dpi;
+
+            //Act
+            sut = new ImageSize(width, 1, dpi);
+
+            //Assert
+            Assert.AreEqual(expected, sut.Width);
+        }
+
+
+        [TestMethod]
+        [TestCategory(TestCategories.Unit)]
+        public void ConstructorPixel_WhenArgumentsAreValid_CorrectlyConvertsHeight()
+        {
+            //Arrange
+            int height = 3;
+            int dpi = 6;
+
+            float expected = (float)height / dpi;
+
+            //Act
+            sut = new ImageSize(1, height, dpi);
+
+            //Assert
+            Assert.AreEqual(expected, sut.Height);
+        }
 
         #endregion Int Constructor Tests
+
+        #region Constructor Two Arg Tests
 
         [TestMethod]
         [TestCategory(TestCategories.Unit)]
@@ -149,7 +228,117 @@ namespace UnitTests.Domain
             sut = new ImageSize(1, 0);
         }
 
-        
+        [TestMethod]
+        [TestCategory(TestCategories.Unit)]
+        public void ConstructorTwoArg_WhenArgumentsAreValid_AssignsPixelWidthCorrectly()
+        {
+            //Arrange
+            int expected = 3;
 
+            //Act
+            sut = new ImageSize(expected, 1);
+
+            //Assert
+            Assert.AreEqual(expected, sut.PixelWidth);
+
+        }
+
+        [TestMethod]
+        [TestCategory(TestCategories.Unit)]
+        public void ConstructorTwoArg_WhenArgumentsAreValid_AssignsPixelHeightCorrectly()
+        {
+            //Arrange
+            int expected = 3;
+
+            //Act
+            sut = new ImageSize(1, expected);
+
+            //Assert
+            Assert.AreEqual(expected, sut.PixelHeight);
+        }
+
+        [TestMethod]
+        [TestCategory(TestCategories.Unit)]
+        public void ConstructorTwoArg_WhenArgumentsAreValid_AssignsDpiCorrectly()
+        {
+            //Arrange
+            int expected = 300;
+
+            //Act
+            sut = new ImageSize(1, 1);
+
+            //Assert
+            Assert.AreEqual(expected, sut.DPI);
+        }
+
+        [TestMethod]
+        [TestCategory(TestCategories.Unit)]
+        public void ConstructorTwoArg_WhenArgumentsAreValid_CorrectlyConvertsWidth()
+        {
+            //Arrange
+            int width = 3;
+            int dpi = 300;
+
+            float expected = (float)width / dpi;
+
+            //Act
+            sut = new ImageSize(width, 1);
+            //Assert
+            Assert.AreEqual(expected, sut.Width);
+        }
+
+
+        [TestMethod]
+        [TestCategory(TestCategories.Unit)]
+        public void ConstructorTwoArg_WhenArgumentsAreValid_CorrectlyConvertsHeight()
+        {
+            //Arrange
+            int height = 3;
+            int dpi = 300;
+
+            float expected = (float)height / dpi;
+
+            //Act
+            sut = new ImageSize(1, height);
+
+            //Assert
+            Assert.AreEqual(expected, sut.Height);
+        }
+
+        #endregion Constructor Two Arg Tests
+
+        #region ToSize Tests
+
+        [TestMethod]
+        [TestCategory(TestCategories.Unit)]
+        public void ToSize_WhenCalled_MapsWidthCorrectly()
+        {
+            //Arrange
+            var expected = 2;
+            sut = new ImageSize(expected,3);
+
+            //Act
+            var result = sut.ToSize();
+
+            //Assert
+            Assert.AreEqual(expected, result.Width);
+        }
+
+        [TestMethod]
+        [TestCategory(TestCategories.Unit)]
+        public void ToSize_WhenCalled_MapsHeightCorrectly()
+        {
+            //Arrange
+            var expected = 2;
+            sut = new ImageSize(3, expected);
+
+            //Act
+            var result = sut.ToSize();
+
+            //Assert
+            Assert.AreEqual(expected, result.Height);
+        }
+
+        #endregion ToSize Tests
     }
 }

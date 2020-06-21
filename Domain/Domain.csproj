@@ -62,6 +62,7 @@
     <Compile Include="Converters\_ISVGConverter.cs" />
     <Compile Include="DomainModule.cs" />
     <Compile Include="Models\ImageSize.cs" />
+    <Compile Include="Models\ValueObject.cs" />
     <Compile Include="_IFileProcessor.cs" />
     <Compile Include="FileProcessor.cs" />
     <Compile Include="Converters\SVGConverter.cs" />
