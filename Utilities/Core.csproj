@@ -44,7 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CheckIfArgument.cs" />
+    <Compile Include="AssertArgument.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ValueObject.cs" />
   </ItemGroup>

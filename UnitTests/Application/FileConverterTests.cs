@@ -175,6 +175,27 @@ namespace UnitTests.Application
 
         #endregion ConvertFiles Tests
 
+        #region SuppliedResolutions Tests
+
+        [TestMethod]
+        [TestCategory(TestCategories.Unit)]
+        public void SuppliedResolutions_WhenCalled_GetsReadonlyCopy()
+        {
+            //Arrange
+            sut = new FileConverter(mockFileProcessor.Object, fakeResolutions);
+
+            var result = sut.SuppliedResolutions;
+
+            //Act
+            Assert.AreNotEqual(fakeResolutions, result);
+
+            //Assert
+            fakeResolutions.ForEach(x =>
+                Assert.IsTrue(result.Contains(x), "one or more Resolutions is missing from the read-only copy"));
+        }
+
+        #endregion SuppliedResolutions Tests
+
         #region AddSuppliedResolution Tests
 
         [TestMethod]
@@ -188,6 +209,7 @@ namespace UnitTests.Application
         }
 
         #endregion AddSuppliedResolution Tests
+
 
         #region Private Members
 

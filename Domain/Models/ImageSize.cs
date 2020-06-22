@@ -18,9 +18,9 @@ namespace Domain
 
     public ImageSize(float width, float height, int dpi)
     {
-        CheckIfArgument.IsPositive(nameof(width), width);
-        CheckIfArgument.IsPositive(nameof(height), height);
-        CheckIfArgument.IsPositive(nameof(dpi), dpi);
+        AssertArgument.IsPositive(nameof(width), width);
+        AssertArgument.IsPositive(nameof(height), height);
+        AssertArgument.IsPositive(nameof(dpi), dpi);
 
         Width = width;
         Height = height;
@@ -31,9 +31,9 @@ namespace Domain
 
     public ImageSize(int pixelWidth, int pixelHeight, int dpi)
     {
-        CheckIfArgument.IsPositive(nameof(pixelWidth), pixelWidth);
-        CheckIfArgument.IsPositive(nameof(pixelHeight), pixelHeight);
-        CheckIfArgument.IsPositive(nameof(dpi), dpi);
+        AssertArgument.IsPositive(nameof(pixelWidth), pixelWidth);
+        AssertArgument.IsPositive(nameof(pixelHeight), pixelHeight);
+        AssertArgument.IsPositive(nameof(dpi), dpi);
 
         PixelWidth = pixelWidth;
         PixelHeight = pixelHeight;

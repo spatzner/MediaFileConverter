@@ -16,8 +16,8 @@ namespace Applications
         public FileConverter(IFileProcessor fileProcessor, 
             List<Resolution> suppliedResolutions)
         {
-            CheckIfArgument.IsNull(nameof(fileProcessor), fileProcessor);
-            CheckIfArgument.IsNullOrEmpty(nameof(suppliedResolutions), suppliedResolutions);
+            AssertArgument.IsNotNull(nameof(fileProcessor), fileProcessor);
+            AssertArgument.IsNotNullOrEmpty(nameof(suppliedResolutions), suppliedResolutions);
 
             this.fileProcessor = fileProcessor;
             this.suppliedResolutions = suppliedResolutions;
@@ -25,9 +25,9 @@ namespace Applications
 
         public void ConvertFiles(List<string> filesToConvert, List<Resolution> selectedResolutions, string saveLocation)
         {
-            CheckIfArgument.IsNullOrEmpty(nameof(filesToConvert), filesToConvert);
-            CheckIfArgument.IsNullOrEmpty(nameof(selectedResolutions), selectedResolutions);
-            CheckIfArgument.IsNullOrEmpty(nameof(saveLocation), saveLocation);
+            AssertArgument.IsNotNullOrEmpty(nameof(filesToConvert), filesToConvert);
+            AssertArgument.IsNotNullOrEmpty(nameof(selectedResolutions), selectedResolutions);
+            AssertArgument.IsNotNullOrEmpty(nameof(saveLocation), saveLocation);
 
             List<ImageSize> sizes = selectedResolutions.Select(x => x.ConvertToImageSize()).ToList();
             

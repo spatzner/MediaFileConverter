@@ -9,7 +9,7 @@ namespace Domain
 
         public AIConverter(IIllustratorProvider illustratorProvider)
         {
-            CheckIfArgument.IsNull(nameof(illustratorProvider), illustratorProvider);
+            AssertArgument.IsNotNull(nameof(illustratorProvider), illustratorProvider);
 
             this.illustratorProvider = illustratorProvider;
         }

@@ -82,6 +82,7 @@
   <ItemGroup>
     <Compile Include="Application\FileConverterTests.cs" />
     <Compile Include="Application\ResolutionTests.cs" />
+    <Compile Include="Core\AssertArgumentTests.cs" />
     <Compile Include="Domain\AIConverterTests.cs" />
     <Compile Include="Domain\FileProcessorTests.cs" />
     <Compile Include="Domain\ImageSizeTests.cs" />

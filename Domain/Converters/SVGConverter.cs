@@ -15,9 +15,9 @@ namespace Domain
 
         public SVGConverter(ISVGWrapper svgDocumentWrapper, IBitmapWrapper bitmapWrapper, IFileSystemProvider fileSystemProvider)
         {
-            CheckIfArgument.IsNull(nameof(svgDocumentWrapper), svgDocumentWrapper);
-            CheckIfArgument.IsNull(nameof(bitmapWrapper), bitmapWrapper);
-            CheckIfArgument.IsNull(nameof(fileSystemProvider), fileSystemProvider);
+            AssertArgument.IsNotNull(nameof(svgDocumentWrapper), svgDocumentWrapper);
+            AssertArgument.IsNotNull(nameof(bitmapWrapper), bitmapWrapper);
+            AssertArgument.IsNotNull(nameof(fileSystemProvider), fileSystemProvider);
 
             this.svgDocumentWrapper = svgDocumentWrapper;
             this.bitmapWrapper = bitmapWrapper;

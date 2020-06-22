@@ -17,8 +17,8 @@ namespace Domain
 
         public FileProcessor(ISVGConverter svgConverter, IAIConverter aiConverter)
         {
-            CheckIfArgument.IsNull(nameof(svgConverter), svgConverter);
-            CheckIfArgument.IsNull(nameof(aiConverter), aiConverter);
+            AssertArgument.IsNotNull(nameof(svgConverter), svgConverter);
+            AssertArgument.IsNotNull(nameof(aiConverter), aiConverter);
 
             this.svgConverter = svgConverter;
             this.aiConverter = aiConverter;

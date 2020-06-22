@@ -14,6 +14,11 @@ namespace UnitTests.TestUtilities
             return (T)GetFieldReference(source.GetType(), fieldName).GetValue(source);
         }
 
+        public static TReturn GetFieldValue<TReturn>(Type @class, string fieldName)
+        {
+            return (TReturn) GetFieldReference(@class, fieldName).GetValue(null);
+        }
+
         public static void SetFieldValue<T>(object source, string fieldName, object value)
         {
             GetFieldReference(typeof(T), fieldName).SetValue(source, value);

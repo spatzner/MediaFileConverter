@@ -12,9 +12,9 @@ namespace Applications
         public Resolution(float widthInches, float heightInches, int dpi)
         {
 
-            CheckIfArgument.IsPositive(nameof(widthInches), widthInches);
-            CheckIfArgument.IsPositive(nameof(heightInches), heightInches);
-            CheckIfArgument.IsPositive(nameof(dpi), dpi);
+            AssertArgument.IsPositive(nameof(widthInches), widthInches);
+            AssertArgument.IsPositive(nameof(heightInches), heightInches);
+            AssertArgument.IsPositive(nameof(dpi), dpi);
 
             Width = widthInches;
             Height = heightInches;
