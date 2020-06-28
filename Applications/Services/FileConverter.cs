@@ -31,7 +31,7 @@ namespace Applications
 
             List<ImageSize> sizes = selectedResolutions.Select(x => x.ConvertToImageSize()).ToList();
             
-            fileProcessor.ConvertSVGToPNG(filesToConvert, sizes, saveLocation);
+            fileProcessor.ConvertSVGToPNG(filesToConvert, sizes, saveLocation).ToList();
         }
 
         public void AddSuppliedResolution(Resolution resolution)

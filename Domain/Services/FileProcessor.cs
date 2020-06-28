@@ -13,8 +13,8 @@ namespace Domain
 
         private readonly List<ImageSize> SkipSizeIterator;
 
-        public FileProcessor([Named(ConverterType.AIToSVG)] IImageConverter svgToPNGConverter,
-                             [Named(ConverterType.SVGToPNG)] IImageConverter aiToSVGConverter)
+        public FileProcessor([Named(ConverterType.SVGToPNG)] IImageConverter svgToPNGConverter,
+                             [Named(ConverterType.AIToSVG)] IImageConverter aiToSVGConverter)
         {
             AssertArgument.IsNotNull(nameof(svgToPNGConverter), svgToPNGConverter);
             AssertArgument.IsNotNull(nameof(aiToSVGConverter), aiToSVGConverter);

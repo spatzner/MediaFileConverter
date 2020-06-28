@@ -86,11 +86,14 @@ namespace UnitTests.Domain
 
             sut = CreateValidSVGConverter();
 
+            var expected = ReflectionUtilities.ExecutePrivateMethod<SVGToPNGConverter, string>(sut, "GetOutputLocation",
+                new object[] { file, saveLocation });
+
             //Act
             sut.Convert(file, new ImageSize(1, 1), saveLocation);
 
             //Assert
-            mockFileSystemProvider.Verify(x => x.CreateDirectory(saveLocation));
+            mockFileSystemProvider.Verify(x => x.CreateDirectory(expected));
         }
 
         [TestMethod]
@@ -152,8 +155,10 @@ namespace UnitTests.Domain
 
             sut = CreateValidSVGConverter();
 
+            var outputLocation = ReflectionUtilities.ExecutePrivateMethod<SVGToPNGConverter, string>(sut, "GetOutputLocation",
+                new object[] { file, saveLocation });
             var expectedFileName = ReflectionUtilities.ExecutePrivateMethod<SVGToPNGConverter, string>(sut, "GetFileSaveLocation",
-                new object[] {file, saveLocation, imageSize});
+                new object[] {file, outputLocation, imageSize});
 
             //Act
             sut.Convert(file, imageSize, saveLocation);
