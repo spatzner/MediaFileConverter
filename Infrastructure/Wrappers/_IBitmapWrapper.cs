@@ -1,10 +1,10 @@
 ﻿using System.Drawing;
 using Svg;
 
-namespace Domain.Converters
+namespace Infrastructure.Wrappers
 {
     public interface IBitmapWrapper
     {
-        void CreatePNG(string saveLocation, Size internSize, SvgDocument svgDocument);
+        void CreatePNG(string fileName, SvgDocument svgDocument, Size internSize);
     }
 }

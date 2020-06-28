@@ -2,10 +2,6 @@
 using System.Drawing;
 using Core;
 
-
-//this base class is adapted from from Jimmy Bogard
-//http://grabbagoft.blogspot.com/2007/06/generic-value-object-equality.html
-
 namespace Domain
 {
     public class ImageSize : ValueObject<ImageSize>

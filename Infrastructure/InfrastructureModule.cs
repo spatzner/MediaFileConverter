@@ -17,6 +17,7 @@ namespace Infrastructure
             Bind<ISVGWrapper>().To<SVGWrapper>();
             Bind<IDateTimeProvider>().To<DateTimeProvider>();
             Bind<IFileSystemProvider>().To<FileSystemProvider>();
+            Bind<IBitmapWrapper>().To<BitmapWrapper>();
         }
     }
 }

@@ -80,13 +80,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Application\ApplicationModuleTests.cs" />
     <Compile Include="Application\FileConverterTests.cs" />
     <Compile Include="Application\ResolutionTests.cs" />
     <Compile Include="Core\AssertArgumentTests.cs" />
-    <Compile Include="Domain\AIConverterTests.cs" />
+    <Compile Include="Domain\AIToSVGConverterTests.cs" />
+    <Compile Include="Domain\DomainModuleTests.cs" />
     <Compile Include="Domain\FileProcessorTests.cs" />
     <Compile Include="Domain\ImageSizeTests.cs" />
-    <Compile Include="Domain\SVGConverterTests.cs" />
+    <Compile Include="Domain\SVGToPNGConverterTests.cs" />
+    <Compile Include="Infrastructure\DateTimeProviderTests.cs" />
+    <Compile Include="Infrastructure\InfrastructureModuleTests.cs" />
     <Compile Include="TestUtilities\ReflectionUtilities.cs" />
     <Compile Include="TestUtilities\Test.cs" />
     <Compile Include="TestUtilities\TestCategories.cs" />

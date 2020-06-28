@@ -191,7 +191,7 @@ namespace UnitTests.Application
 
             //Assert
             fakeResolutions.ForEach(x =>
-                Assert.IsTrue(result.Contains(x), "one or more Resolutions is missing from the read-only copy"));
+                Assert.IsTrue(result.Contains(x), "one or more Resolutions are missing from the read-only copy"));
         }
 
         #endregion SuppliedResolutions Tests

@@ -2,16 +2,16 @@
 using System.Drawing.Imaging;
 using Svg;
 
-namespace Domain.Converters
+namespace Infrastructure.Wrappers
 {
     public class BitmapWrapper : IBitmapWrapper
     {
-        public void CreatePNG(string saveLocation, Size internSize, SvgDocument svgDocument)
+        public void CreatePNG(string fileName, SvgDocument svgDocument, Size internSize)
         {
             using (Bitmap bitmap = new Bitmap(internSize.Width, internSize.Height))
             {
                 svgDocument.Draw(bitmap);
-                bitmap.Save(saveLocation, ImageFormat.Png);
+                bitmap.Save(fileName, ImageFormat.Png);
             }
         }
     }

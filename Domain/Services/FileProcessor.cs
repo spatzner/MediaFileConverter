@@ -1,66 +1,49 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Core;
-using Domain.Converters;
+using Ninject;
 
 namespace Domain
 {
     public class FileProcessor : IFileProcessor
     {
-        private readonly ISVGConverter svgConverter;
-        private readonly IAIConverter aiConverter;
+        private readonly IImageConverter aiToSVGConverter;
+        private readonly IImageConverter svgToPNGConverter;
 
-        public FileProcessor(ISVGConverter svgConverter, IAIConverter aiConverter)
+        private readonly List<ImageSize> SkipSizeIterator;
+
+        public FileProcessor([Named(ConverterType.AIToSVG)] IImageConverter svgToPNGConverter,
+                             [Named(ConverterType.SVGToPNG)] IImageConverter aiToSVGConverter)
         {
-            AssertArgument.IsNotNull(nameof(svgConverter), svgConverter);
-            AssertArgument.IsNotNull(nameof(aiConverter), aiConverter);
+            AssertArgument.IsNotNull(nameof(svgToPNGConverter), svgToPNGConverter);
+            AssertArgument.IsNotNull(nameof(aiToSVGConverter), aiToSVGConverter);
 
-            this.svgConverter = svgConverter;
-            this.aiConverter = aiConverter;
+            this.aiToSVGConverter = aiToSVGConverter;
+            this.svgToPNGConverter = svgToPNGConverter;
+
+            SkipSizeIterator = new List<ImageSize> {new ImageSize(1, 1)};
         }
 
-        public void ConvertAIToPNG(List<string> files, List<ImageSize> imageSizes, string saveLocation)
+        public IEnumerable<string> ConvertAIToPNG(List<string> files, List<ImageSize> imageSizes, string saveLocation)
         {
-            Directory.CreateDirectory(saveLocation);
-            foreach (string file in files)
-            {
-                string fileName = Path.GetFileNameWithoutExtension(file);
-                string outputSaveLocation = Path.Combine(saveLocation, fileName);
+            var svgFiles = Convert(files, SkipSizeIterator, saveLocation, aiToSVGConverter.Convert);
 
-                string svgFile = aiConverter.ConvertToSVG(file, outputSaveLocation);
-
-                foreach (ImageSize imageSize in imageSizes)
-                {
-                    string fileSaveLocation =
-                        Path.Combine(outputSaveLocation, $"{fileName}_{imageSize.Width}x{imageSize.Height}.png");
-
-                    svgConverter.ConvertToPNG(svgFile, imageSize.ToSize(), fileSaveLocation);
-                }
-            }
+            return ConvertSVGToPNG(svgFiles, imageSizes, saveLocation);
         }
 
-        public void ConvertSVGToPNG(List<string> files, List<ImageSize> imageSizes, string saveLocation)
+        public IEnumerable<string> ConvertSVGToPNG(IEnumerable<string> files, List<ImageSize> imageSizes,
+            string saveLocation)
         {
-            Directory.CreateDirectory(saveLocation);
-            foreach (string file in files)
-            {
-                var fileName = Path.GetFileNameWithoutExtension(file);
-                var outputSaveLocation = Path.Combine(saveLocation, fileName);
-                Directory.CreateDirectory(outputSaveLocation);
+           return Convert(files, imageSizes, saveLocation, svgToPNGConverter.Convert);
+        }
 
-                foreach (var imageSize in imageSizes)
-                {
-                    var fileSaveLocation =
-                        Path.Combine(outputSaveLocation, $"{fileName}_{imageSize.Width}x{imageSize.Height}.png");
-
-                    svgConverter.ConvertToPNG(file, imageSize.ToSize(), fileSaveLocation);
-                }
-            }
+        public IEnumerable<string> Convert(IEnumerable<string> files, List<ImageSize> imageSizes, string saveLocation,
+            Func<string, ImageSize, string, string> converterFunc)
+        {
+            foreach (var file in files)
+            foreach (var imageSize in imageSizes)
+                yield return converterFunc(file, imageSize, saveLocation);
         }
     }
 }

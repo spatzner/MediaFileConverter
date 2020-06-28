@@ -13,8 +13,10 @@ namespace UI
     {
         public override void Load()
         {
+            string defaultLocation = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+
             // ReSharper disable once PossibleNullReferenceException - Not null if wired correctly
-            Kernel.Load(new[] {new ApplicationModule()});
+            Kernel.Load(new[] {new ApplicationModule(defaultLocation) });
 
             Bind<IFileConverterViewModel>().To<FileConverterViewModel>();
             Bind<MainWindow>().To<MainWindow>();

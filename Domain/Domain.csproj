@@ -57,15 +57,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Converters\AIConverter.cs" />
-    <Compile Include="Converters\_IAIConverter.cs" />
-    <Compile Include="Converters\_ISVGConverter.cs" />
+    <Compile Include="Converters\AIToSVGConverter.cs" />
     <Compile Include="DomainModule.cs" />
+    <Compile Include="Models\ConverterType.cs" />
     <Compile Include="Models\ImageSize.cs" />
+    <Compile Include="Converters\SVGToPNGConverter.cs" />
     <Compile Include="Services\_IFileProcessor.cs" />
     <Compile Include="Services\FileProcessor.cs" />
-    <Compile Include="Converters\SVGConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Converters\_IImageConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
