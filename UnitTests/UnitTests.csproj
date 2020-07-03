@@ -84,6 +84,7 @@
     <Compile Include="Application\FileConverterTests.cs" />
     <Compile Include="Application\ResolutionTests.cs" />
     <Compile Include="Core\AssertArgumentTests.cs" />
+    <Compile Include="Core\ValueObjectTests.cs" />
     <Compile Include="Domain\AIToSVGConverterTests.cs" />
     <Compile Include="Domain\DomainModuleTests.cs" />
     <Compile Include="Domain\FileProcessorTests.cs" />
